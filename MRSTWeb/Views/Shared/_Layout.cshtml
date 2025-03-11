@@ -1,0 +1,38 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description" content="@ViewBag.MetaDescription">
+     <meta name="author" content="CL Design">
+     <title>@ViewBag.Title - CL Design</title>
+
+
+
+     <!-- Styles -->
+     @Styles.Render("~/Content/css")
+
+  
+     <!-- Google Fonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+     @Html.Partial("_Header")
+
+     <main role="main">
+          @RenderBody()
+     </main>
+
+     @Html.Partial("_Footer")
+
+     <!-- Scripts -->
+     @Scripts.Render("~/bundles/jquery.min")
+     @Scripts.Render("~/bundles/bootstrap.bundle.min")
+     @RenderSection("scripts", false)
+</body>
+</html>
