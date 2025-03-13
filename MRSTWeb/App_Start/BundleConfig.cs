@@ -7,19 +7,17 @@ using System.Web.Mvc;
 
 public class BundleConfig
 {
-     // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
      public static void RegisterBundles(BundleCollection bundles)
      {
-          // CSS Bundles (includes global styles and footer styles)
+
           bundles.Add(new StyleBundle("~/Content/css").Include(
-                    "~/Content/bootstrap.min.css",  // Bootstrap CSS
-                    "~/Content/bootstrap-icons.css", // Bootstrap Icons
-                    "~/Content/slick.css",           // Slick carousel styles
+                    "~/Content/bootstrap.min.css",  
+                    "~/Content/bootstrap-icons.css", 
+                    "~/Content/slick.css",           // carousel styles
                     "~/Content/site.css",
-                    "~/Content/tooplate-little-fashion.css"  // Your custom styles
+                    "~/Content/tooplate-little-fashion.css"  
           ));
 
-          // JavaScript Bundles (includes global scripts and footer scripts)
           bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                       "~/Scripts/jquery.min.js"
           ));
@@ -35,7 +33,6 @@ public class BundleConfig
                       "~/Scripts/custom.js"
           ));
 
-          // Enable Optimizations (set to false for debugging)
           BundleTable.EnableOptimizations = true;
      }
 }
