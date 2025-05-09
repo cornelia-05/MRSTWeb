@@ -313,8 +313,8 @@
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Product_detail.cshtml" />
     <None Include="Views\Home\Products.cshtml" />
-    <None Include="Views\Home\Sign-in.cshtml" />
-    <None Include="Views\Home\Sign-up.cshtml" />
+    <None Include="Views\Home\SignIn.cshtml" />
+    <None Include="Views\Home\SignUp.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

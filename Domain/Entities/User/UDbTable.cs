@@ -23,12 +23,12 @@ namespace Domain.Entities.User
 
           [Required]
           [Display(Name = "Username")]
-          [StringLength(30, MinimumLength = 5, ErrorMessage = "Username must be between 5 and 30 characters.")]
+          [StringLength(12, MinimumLength = 5, ErrorMessage = "Username must be between 5 and 12 characters.")]
           public string Username { get; set; }
 
           [Required]
           [Display(Name = "Password")]
-          [StringLength(50, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters.")]
+          [StringLength(15, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters.")]
           public string Password { get; set; }
 
           [Required]

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Optimization;
 using System.Web.Mvc;
 
+
 public class BundleConfig
 {
      public static void RegisterBundles(BundleCollection bundles)
@@ -34,5 +35,6 @@ public class BundleConfig
           ));
 
           BundleTable.EnableOptimizations = true;
+
      }
 }
