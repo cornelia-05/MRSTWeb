@@ -288,15 +288,15 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\202503311302438_CreateUDbTable.resx">
       <DependentUpon>202503311302438_CreateUDbTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505121516353_AddUserPrimaryKey.resx">
       <DependentUpon>202505121516353_AddUserPrimaryKey.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ILLink\ILLink.Descriptors.LibraryBuild.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
