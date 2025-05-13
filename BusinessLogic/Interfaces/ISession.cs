@@ -1,6 +1,5 @@
-﻿using Domain.Entities.Res;
+﻿using Domain.Entities.User.Global;
 using Domain.Entities.User;
-using Domain.Entities.User.Global;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -11,8 +10,7 @@ namespace BusinessLogic.Interfaces
 {
    public  interface ISession
     {
-        ActionStatus UserLogin(ULoginData data);
+        ActionStatus UserLogin(ULoginData loginData);
         LevelStatus CheckLevel(string key);
-        
-    }
+     }
 }

@@ -1,10 +1,12 @@
-﻿using MRSTWeb.BusinessLogic;
+﻿using BusinessLogic;
+using MRSTWeb.BusinessLogic;
 using MRSTWeb.BusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 namespace MRSTWeb.Controllers
 {
 	public class ProductDetailController : Controller
@@ -13,8 +15,9 @@ namespace MRSTWeb.Controllers
            
         public ProductDetailController()
         {
-            var businessLogic = new BusinessLogic.BusinessLogic();
-            _product = businessLogic.GetProductBL();
+
+               var logic = new LogicProvider();
+               var session = logic.GetsessionBL();
         }
         public ActionResult Index()
         {

@@ -8,17 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace MRSTWeb.BusinessLogic
+namespace BusinessLogic
 {
-   public class BusinessLogic
-    {
-        public ISession GetsessionBL()
-        {
-            return new SessionBL();
-        }
-        public IProduct GetProductBL()
-        {
-            return new ProductBL();
-        }
-    }
+     public class LogicProvider
+     {
+          public ISession GetsessionBL() => new SessionBL();
+          public IProduct GetProductBL() => new ProductBL();
+     }
 }

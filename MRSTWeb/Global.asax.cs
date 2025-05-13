@@ -11,14 +11,24 @@ using MRSTWeb.App_Start;
 
 namespace MRSTWeb
 {
-    public class Global : HttpApplication
-    {
-        void Application_Start(object sender, EventArgs e)
-        {
+     public class Global : HttpApplication
+     {
+          void Application_Start(object sender, EventArgs e)
+          {
                AreaRegistration.RegisterAllAreas();
                FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
                RouteConfig.RegisterRoutes(RouteTable.Routes);
                BundleConfig.RegisterBundles(BundleTable.Bundles);
           }
-    }
+
+          protected void Application_Start()
+          {
+               AreaRegistration.RegisterAllAreas();
+               UnityConfig.RegisterComponents(); // ← Add this line
+               RouteConfig.RegisterRoutes(RouteTable.Routes);
+               BundleConfig.RegisterBundles(BundleTable.Bundles);
+          }
+
+
+     }
 }

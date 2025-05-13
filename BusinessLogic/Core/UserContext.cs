@@ -10,7 +10,7 @@ using System.Data.Entity;
 
 
 
-namespace BusinessLogic.Core
+namespace BusinessLogic
 {
      public class UserContext : DbContext
      {

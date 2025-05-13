@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Entities.User;
-using Domain.Entities.Res;
 using Domain.Entities.User.Global;
 using Domain.Entities.Product;
 
