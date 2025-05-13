@@ -322,14 +322,19 @@
     <Content Include="Scripts\jQuery.headroom.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\slick.min.js" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+    <Content Include="Views\Account\SignUp.cshtml" />
     <None Include="Views\Home\About.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Faq.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Product_detail.cshtml" />
     <None Include="Views\Home\Products.cshtml" />
+<<<<<<< HEAD
     <None Include="Views\Account\SignIn.cshtml" />
     <None Include="Views\Account\SignUp.cshtml" />
+=======
+>>>>>>> c356d3cab15b8d080c37f6e36bbc2f5ac0aad200
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
