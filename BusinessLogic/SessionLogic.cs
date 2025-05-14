@@ -51,21 +51,18 @@ namespace BusinessLogic
           {
                var user = _context.Users.FirstOrDefault(u => u.SessionKey == sessionKey);
 
+
                if (user != null)
                {
-                    if (Enum.TryParse(user.Role, out LevelAcces level))
-                    {
-                         return new LevelStatus { Role = level }; 
-                    }
-                    else
-                    {
-                         // If role is not recognized, default to Guest
-                         return new LevelStatus { Role = LevelAcces.Guest };
-                    }
+                    // Directly use the enum value
+                    return new LevelStatus { Role = user.Role };
+               }
+               else
+               {
+                    // If the user is null or role is not recognized, default to Guest
+                    return new LevelStatus { Role = LevelAcces.Guest };
                }
 
-               // If user is not found, default to Guest
-               return new LevelStatus { Role = LevelAcces.Guest };
           }
 
      }

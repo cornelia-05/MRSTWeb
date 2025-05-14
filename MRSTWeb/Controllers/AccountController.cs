@@ -6,6 +6,7 @@ using BusinessLogic;
 using DataLayer.Context;
 using Domain.Entities.User;
 using MRSTWeb.Models;
+using Domain.Enums;
 
 namespace MRSTWeb.Controllers
 {
@@ -26,38 +27,39 @@ namespace MRSTWeb.Controllers
                return View();
           }
 
-          // SignIn Action (POST)
           [HttpPost]
           [ValidateAntiForgeryToken]
-          public ActionResult SignIn(User login)
+          public ActionResult SignIn(LoginViewModel model)
           {
                if (ModelState.IsValid)
                {
-                    var data = new ULoginData
+                    var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+                    if (user != null && BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                     {
-                         Credential = login.Email,
-                         Password = login.Password,
-                         LoginIp = Request.UserHostAddress,
-                         LoginDataTime = (int)DateTime.Now.Ticks
-                    };
+                         Session["UserKey"] = Guid.NewGuid().ToString();
+                         Session["Email"] = user.Email;
 
-                    var response = _session.UserLogin(data);
+                         if (user.Role == LevelAcces.Admin)
+                         {
+                              Session["IsAdmin"] = true;
+                         }
+                         else
+                         {
+                              Session["IsAdmin"] = false;
+                         }
 
-                    if (response.Status)
-                    {
-                         Session["UserKey"] = response.SessionKey;
-                         Session["Email"] = login.Email;
                          return RedirectToAction("Index", "Home");
+
                     }
-                    else
-                    {
-                         ModelState.AddModelError("", response.StatusMessage);
-                         return View();
-                    }
+
+                    ModelState.AddModelError("", "Invalid email or password.");
                }
 
-               return View();
+               return View(model);
           }
+
+
+
 
           // SignUp Action (GET)
           public ActionResult SignUp()
@@ -82,7 +84,7 @@ namespace MRSTWeb.Controllers
                     {
                          Email = model.Email,
                          Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                         Role = "User"
+                         Role = LevelAcces.User
                     };
 
                     _context.Users.Add(user);
@@ -93,5 +95,16 @@ namespace MRSTWeb.Controllers
 
                return View(model);
           }
+
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          public ActionResult Logout()
+          {
+               // Clear the session
+               Session.Clear();
+               Session.Abandon();
+               return RedirectToAction("Index", "Home");
+          }
+
      }
 }

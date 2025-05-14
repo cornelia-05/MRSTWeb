@@ -1,140 +1,140 @@
 @{
-     Layout = "~/Views/Shared/_Layout.cshtml";
-     ViewData["Title"] = "Index";
+     Layout = ViewBag.Layout ?? "~/Views/Shared/_Layout.cshtml";
 }
 
 
 
-          <section class="slick-slideshow">
-               <div class="slick-custom">
-                    <img src="~/images/Start page 1.png" class="img-fluid" alt="">
 
-                    <div class="slick-bottom">
-                         <div class="container">
-                              <div class="row">
-                                   <div class="col-lg-6 col-10">
-                                        <h1 class="slick-title">Cool Fashion</h1>
+<section class="slick-slideshow">
+     <div class="slick-custom">
+          <img src="~/images/Start page 1.png" class="img-fluid" alt="">
 
-                                        <p class="lead text-white mt-lg-3 mb-lg-5">We build your dreams</p>
-
-                                        <a asp-controller="Home" asp-action="about" class="btn custom-btn">About us</a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-               </div>
-
-               <div class="slick-custom">
-                    <img src="~/images/start page 3.jpg" class="img-fluid" alt="">
-
-                    <div class="slick-bottom">
-                         <div class="container">
-                              <div class="row">
-                                   <div class="col-lg-6 col-10">
-                                        <h1 class="slick-title">New Design</h1>
-
-                                        <p class="lead text-white mt-lg-3 mb-lg-5">Inovative design, you will be the coolest</p>
-
-                                        <a href="products.html" class="btn custom-btn">Explore services</a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-               </div>
-
-          </section>
-
-          <section class="featured-product section-padding">
+          <div class="slick-bottom">
                <div class="container">
                     <div class="row">
+                         <div class="col-lg-6 col-10">
+                              <h1 class="slick-title">Cool Fashion</h1>
 
-                         <div class="col-12 text-center">
-                              <h2 class="mb-5">Services and products</h2>
+                              <p class="lead text-white mt-lg-3 mb-lg-5">We build your dreams</p>
+
+                              <a asp-controller="Home" asp-action="about" class="btn custom-btn">About us</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+     <div class="slick-custom">
+          <img src="~/images/start page 3.jpg" class="img-fluid" alt="">
+
+          <div class="slick-bottom">
+               <div class="container">
+                    <div class="row">
+                         <div class="col-lg-6 col-10">
+                              <h1 class="slick-title">New Design</h1>
+
+                              <p class="lead text-white mt-lg-3 mb-lg-5">Inovative design, you will be the coolest</p>
+
+                              <a href="products.html" class="btn custom-btn">Explore services</a>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+</section>
+
+<section class="featured-product section-padding">
+     <div class="container">
+          <div class="row">
+
+               <div class="col-12 text-center">
+                    <h2 class="mb-5">Services and products</h2>
+               </div>
+
+               <div class="col-lg-4 col-12 mb-3">
+                    <div class="product-thumb">
+                         <a href="product-detail.html">
+                              <img src="~/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
+                         </a>
+
+                         <div class="product-top d-flex">
+                              <span class="product-alert me-auto">New</span>
+
+                              <a href="#" class="bi-heart-fill product-icon"></a>
                          </div>
 
-                         <div class="col-lg-4 col-12 mb-3">
-                              <div class="product-thumb">
-                                   <a href="product-detail.html">
-                                        <img src="~/images/product/evan-mcdougall-qnh1odlqOmk-unsplash.jpeg" class="img-fluid product-image" alt="">
-                                   </a>
+                         <div class="product-info d-flex">
+                              <div>
+                                   <h5 class="product-title mb-0">
+                                        <a href="product-detail.html" class="product-title-link">Tree pot</a>
+                                   </h5>
 
-                                   <div class="product-top d-flex">
-                                        <span class="product-alert me-auto">New</span>
-
-                                        <a href="#" class="bi-heart-fill product-icon"></a>
-                                   </div>
-
-                                   <div class="product-info d-flex">
-                                        <div>
-                                             <h5 class="product-title mb-0">
-                                                  <a href="product-detail.html" class="product-title-link">Tree pot</a>
-                                             </h5>
-
-                                             <p class="product-p">Original package design from house</p>
-                                        </div>
-
-                                        <small class="product-price text-muted ms-auto mt-auto mb-5">$25</small>
-                                   </div>
+                                   <p class="product-p">Original package design from house</p>
                               </div>
+
+                              <small class="product-price text-muted ms-auto mt-auto mb-5">$25</small>
                          </div>
-
-                         <div class="col-lg-4 col-12 mb-3">
-                              <div class="product-thumb">
-                                   <a href="product-detail.html">
-                                        <img src="~/images/product/jordan-nix-CkCUvwMXAac-unsplash.jpeg" class="img-fluid product-image" alt="">
-                                   </a>
-
-                                   <div class="product-top d-flex">
-                                        <span class="product-alert">Preț avantajos</span>
-
-                                        <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                   </div>
-
-                                   <div class="product-info d-flex">
-                                        <div>
-                                             <h5 class="product-title mb-0">
-                                                  <a href="product-detail.html" class="product-title-link">Fashion Set</a>
-                                             </h5>
-
-                                             <p class="product-p">Costume Package</p>
-                                        </div>
-
-                                        <small class="product-price text-muted ms-auto mt-auto mb-5">$35</small>
-                                   </div>
-                              </div>
-                         </div>
-
-                         <div class="col-lg-4 col-12">
-                              <div class="product-thumb">
-                                   <a href="product-detail.html">
-                                        <img src="~/images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg" class="img-fluid product-image" alt="">
-                                   </a>
-
-                                   <div class="product-top d-flex">
-                                        <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                                   </div>
-
-                                   <div class="product-info d-flex">
-                                        <div>
-                                             <h5 class="product-title mb-0">
-                                                  <a href="product-detail.html" class="product-title-link">Juice Drinks</a>
-                                             </h5>
-
-                                             <p class="product-p">Nature made another world</p>
-                                        </div>
-
-                                        <small class="product-price text-muted ms-auto mt-auto mb-5">$45</small>
-                                   </div>
-                              </div>
-                         </div>
-
-
-
-
-
-
                     </div>
                </div>
 
-          </section>
+               <div class="col-lg-4 col-12 mb-3">
+                    <div class="product-thumb">
+                         <a href="product-detail.html">
+                              <img src="~/images/product/jordan-nix-CkCUvwMXAac-unsplash.jpeg" class="img-fluid product-image" alt="">
+                         </a>
+
+                         <div class="product-top d-flex">
+                              <span class="product-alert">Preț avantajos</span>
+
+                              <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                         </div>
+
+                         <div class="product-info d-flex">
+                              <div>
+                                   <h5 class="product-title mb-0">
+                                        <a href="product-detail.html" class="product-title-link">Fashion Set</a>
+                                   </h5>
+
+                                   <p class="product-p">Costume Package</p>
+                              </div>
+
+                              <small class="product-price text-muted ms-auto mt-auto mb-5">$35</small>
+                         </div>
+                    </div>
+               </div>
+
+               <div class="col-lg-4 col-12">
+                    <div class="product-thumb">
+                         <a href="product-detail.html">
+                              <img src="~/images/product/nature-zen-3Dn1BZZv3m8-unsplash.jpeg" class="img-fluid product-image" alt="">
+                         </a>
+
+                         <div class="product-top d-flex">
+                              <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
+                         </div>
+
+                         <div class="product-info d-flex">
+                              <div>
+                                   <h5 class="product-title mb-0">
+                                        <a href="product-detail.html" class="product-title-link">Juice Drinks</a>
+                                   </h5>
+
+                                   <p class="product-p">Nature made another world</p>
+                              </div>
+
+                              <small class="product-price text-muted ms-auto mt-auto mb-5">$45</small>
+                         </div>
+                    </div>
+               </div>
+
+
+
+
+
+
+          </div>
+     </div>
+
+</section>
 

@@ -21,8 +21,18 @@ namespace MRSTWeb.Controllers
      {
           public ActionResult Index()
           {
+               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+               {
+                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
+               }
+               else
+               {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+               }
+
                return View();
           }
+
 
           public ActionResult About()
           {
@@ -44,10 +54,5 @@ namespace MRSTWeb.Controllers
           {
                return View();
           }
-<<<<<<< HEAD
-=======
-         
->>>>>>> c356d3cab15b8d080c37f6e36bbc2f5ac0aad200
-
      }
 }

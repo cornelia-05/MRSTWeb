@@ -1,5 +1,9 @@
+﻿@Html.AntiForgeryToken()
+@{
+     ViewBag.Title = "_AdminLayout";
+}
 
-@Html.AntiForgeryToken()
+
 @using System.Web.Optimization
 
 <!DOCTYPE html>
@@ -26,7 +30,7 @@
 </head>
 
 <body>
-     @Html.Partial("_Header")
+     @Html.Partial("_AdminHeader")
 
      <main role="main">
           @RenderBody()

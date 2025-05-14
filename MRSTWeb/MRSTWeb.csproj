@@ -330,8 +330,6 @@
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Product_detail.cshtml" />
     <None Include="Views\Home\Products.cshtml" />
-    <None Include="Views\Account\SignIn.cshtml" />
-    <None Include="Views\Account\SignUp.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +344,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Models\SessionFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -357,6 +356,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Shared\_AdminHeader.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
