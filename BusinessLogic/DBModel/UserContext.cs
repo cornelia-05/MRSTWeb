@@ -1,21 +1,26 @@
-﻿using Domain.Entities.User;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLogic.Models;
+using System.Runtime.Remoting.Contexts;
+using MRSTWeb.Domain.Entities;
+using MRSTWeb.Domain.Entities.User;
+using System.Data.Entity;
+using MRSTWeb.Data.Context;
 
-namespace BusinessLogic.DBModel
+namespace BusinessLogic
 {
-     public class UserContext : DbContext
+     public class UserContext : DBContext
      {
-          public UserContext()
-              : base("name=eUseControl") // connection string name defined in Web.config
-          {
-          }
+          public DbSet<ULoginData> Users { get; set; }
+          public DbSet<Service> Services { get; set; }
 
-          public virtual DbSet<UDbTable> Users { get; set; }
+          protected override void OnModelCreating(DbModelBuilder modelBuilder)
+          {
+               base.OnModelCreating(modelBuilder);
+
+          }
      }
 }

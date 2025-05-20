@@ -4,23 +4,23 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities.User;
-using Domain.Enums;
+using MRSTWeb.Domain.Entities.User;
+using MRSTWeb.Domain.Enums;
 
-namespace DataLayer.Context
+namespace MRSTWeb.Data.Context
 {
-     public class ApplicationDbContext : DbContext
+     public class DBContext : System.Data.Entity.DbContext
      {
-          public ApplicationDbContext() : base("name=MRSTWebDB") 
+          public DBContext() : base("name=MRSTWebDB") 
           {
           }
 
-          public DbSet<User> Users { get; set; }
+          public DbSet<ULoginData> Users { get; set; }
      }
 
      public class ApplicationDbInitializer
      {
-          public static void Initialize(ApplicationDbContext dbContext)
+          public static void Initialize(DBContext dbContext)
           {
                // Check if the "Admin" user exists
                var adminUser = dbContext.Users.FirstOrDefault(u => u.Role == LevelAcces.Admin);
@@ -28,9 +28,9 @@ namespace DataLayer.Context
                if (adminUser == null)
                {
                     // Create a new admin user if not found
-                    var newAdminUser = new User
+                    var newAdminUser = new ULoginData
                     {
-                         Email = "admin@mrstweb",
+                         Credential = "admin@mrstweb",
                          Password = "123456",  
                          Role = LevelAcces.Admin,
                          SessionKey = Guid.NewGuid().ToString()

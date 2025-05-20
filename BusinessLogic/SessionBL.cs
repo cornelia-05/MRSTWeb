@@ -1,14 +1,14 @@
-﻿using BusinessLogic.Core;
-using BusinessLogic.Interfaces;
-using Domain.Entities.User;
-using Domain.Entities.User.Global;
+﻿using MRSTWeb.BusinessLogic.Core;
+using MRSTWeb.BusinessLogic.Interfaces;
+using MRSTWeb.Domain.Entities.User;
+using MRSTWeb.Domain.Entities.User.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic
+namespace MRSTWeb.BusinessLogic
 {
     public class SessionBL : UserApi, ISession
      {

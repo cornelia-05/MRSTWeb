@@ -14,7 +14,7 @@ public class BundleConfig
           bundles.Add(new StyleBundle("~/Content/css").Include(
                     "~/Content/bootstrap.min.css",  
                     "~/Content/bootstrap-icons.css", 
-                    "~/Content/slick.css",           // carousel styles
+                    "~/Content/slick.css",          
                     "~/Content/site.css",
                     "~/Content/tooplate-little-fashion.css"  
           ));

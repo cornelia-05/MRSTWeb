@@ -1,18 +1,18 @@
-﻿namespace BusinessLogic.Migrations
+﻿namespace MRSTWeb.Data.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<UserContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<MRSTWeb.Data.Context.DBContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(UserContext context)
+        protected override void Seed(MRSTWeb.Data.Context.DBContext context)
         {
             //  This method will be called after migrating to the latest version.
 

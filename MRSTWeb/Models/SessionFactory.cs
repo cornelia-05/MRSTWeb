@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BusinessLogic.Interfaces;
-using BusinessLogic;
+using MRSTWeb.BusinessLogic.Interfaces;
+using MRSTWeb.BusinessLogic;
 
 namespace MRSTWeb.Models
 {

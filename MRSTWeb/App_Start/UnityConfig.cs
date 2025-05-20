@@ -1,7 +1,8 @@
 using System.Web.Mvc;
 using Unity;
-using DataLayer.Context;
-using BusinessLogic.Interfaces;
+using MRSTWeb.Data.Context;
+using MRSTWeb.BusinessLogic.Interfaces;
+using MRSTWeb.BusinessLogic;
 using BusinessLogic;
 using System;
 using Unity.AspNet.Mvc;
@@ -20,7 +21,7 @@ namespace MRSTWeb
 
                // Register dependencies
                container.RegisterType<ISession, SessionLogic>(); 
-               container.RegisterType<ApplicationDbContext>();
+               container.RegisterType<DBContext>();
 
                DependencyResolver.SetResolver(new UnityDependencyResolver(container));
           }

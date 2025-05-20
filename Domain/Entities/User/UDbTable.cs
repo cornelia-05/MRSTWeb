@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Domain.Entities.User
+namespace MRSTWeb.Domain.Entities.User
 {
      public enum URole
      {

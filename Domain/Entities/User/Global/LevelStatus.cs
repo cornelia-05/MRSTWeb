@@ -1,11 +1,11 @@
-﻿using Domain.Enums;
+﻿using MRSTWeb.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities.User.Global
+namespace MRSTWeb.Domain.Entities.User.Global
 {
    public class LevelStatus
     {

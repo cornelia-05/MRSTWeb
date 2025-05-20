@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BusinessLogic.Interfaces;
+using MRSTWeb.BusinessLogic.Interfaces;
 using BusinessLogic;
-using DataLayer.Context;
-using Domain.Entities.User;
+using MRSTWeb.Data.Context;
+using MRSTWeb.Domain.Entities.User;
 using MRSTWeb.Models;
-using Domain.Enums;
+using MRSTWeb.Domain.Enums;
 using System.Web.Helpers;
 using BusinessLogic.Models;
-using Domain.Entities.User.Global;
+using MRSTWeb.Domain.Entities.User.Global;
 using System.Windows.Forms;
 
 

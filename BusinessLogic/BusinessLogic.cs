@@ -1,5 +1,4 @@
-﻿using BusinessLogic;
-using BusinessLogic.Interfaces;
+﻿using MRSTWeb.BusinessLogic;
 using MRSTWeb.BusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;

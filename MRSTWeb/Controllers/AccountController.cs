@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using BusinessLogic.Interfaces;
-using BusinessLogic;
-using DataLayer.Context;
-using Domain.Entities.User;
+using MRSTWeb.BusinessLogic.Interfaces;
+using MRSTWeb.BusinessLogic;
+using MRSTWeb.Data.Context;
+using MRSTWeb.Domain.Entities.User;
 using MRSTWeb.Models;
-using Domain.Enums;
+using MRSTWeb.Domain.Enums;
 
 namespace MRSTWeb.Controllers
 {
      public class AccountController : Controller
      {
           private readonly ISession _session;
-          private readonly ApplicationDbContext _context;
+          private readonly DBContext _context;
 
           public AccountController()
           {
                _session = SessionFactory.GetsessionBL();
-               _context = new ApplicationDbContext();
+               _context = new DBContext();
           }
 
           // SignIn Action (GET)
@@ -33,11 +33,11 @@ namespace MRSTWeb.Controllers
           {
                if (ModelState.IsValid)
                {
-                    var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+                    var user = _context.Users.FirstOrDefault(u => u.Credential == model.Email);
                     if (user != null && BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                     {
                          Session["UserKey"] = Guid.NewGuid().ToString();
-                         Session["Email"] = user.Email;
+                         Session["Email"] = user.Credential;
 
                          if (user.Role == LevelAcces.Admin)
                          {
@@ -74,15 +74,15 @@ namespace MRSTWeb.Controllers
           {
                if (ModelState.IsValid)
                {
-                    if (_context.Users.Any(u => u.Email == model.Email))
+                    if (_context.Users.Any(u => u.Credential == model.Email))
                     {
                          ModelState.AddModelError("Email", "Email is already registered.");
                          return View(model);
                     }
 
-                    var user = new User
+                    var user = new ULoginData
                     {
-                         Email = model.Email,
+                         Credential = model.Email,
                          Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
                          Role = LevelAcces.User
                     };

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Entities.User;
-using Domain.Entities.User.Global;
-using Domain.Entities.Product;
+using MRSTWeb.Domain.Entities.User;
+using MRSTWeb.Domain.Entities.User.Global;
+using MRSTWeb.Domain.Entities.Product;
 
 
-namespace BusinessLogic.Core
+namespace MRSTWeb.BusinessLogic.Core
 {
    public class UserApi
     {
