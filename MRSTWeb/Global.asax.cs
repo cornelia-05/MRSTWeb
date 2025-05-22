@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Web.SessionState;
 using System.Web.Optimization;
 using MRSTWeb.App_Start;
+using MRSTWeb.Data.Context;
 
 namespace MRSTWeb
 {
@@ -27,7 +28,9 @@ namespace MRSTWeb
                UnityConfig.RegisterComponents(); // ← Add this line
                RouteConfig.RegisterRoutes(RouteTable.Routes);
                BundleConfig.RegisterBundles(BundleTable.Bundles);
-          }
+            var context = new DBContext();
+            ApplicationDbInitializer.Initialize(context);
+        }
 
 
      }

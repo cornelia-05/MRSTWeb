@@ -245,6 +245,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Entities\Product\ProductDetail.cs" />
+    <Compile Include="Entities\Product\Service.cs" />
     <Compile Include="Entities\User\Global\ActionStatus.cs" />
     <Compile Include="Entities\User\Global\LevelStatus.cs" />
     <Compile Include="Entities\User\UDbTable.cs" />

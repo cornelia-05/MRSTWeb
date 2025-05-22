@@ -325,7 +325,9 @@
     <Content Include="Views\Account\SignIn.cshtml" />
     <Content Include="Views\Account\SignUp.cshtml" />
     <None Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\AddProduct.cshtml" />
     <None Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\EditProduct.cshtml" />
     <None Include="Views\Home\Faq.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Product_detail.cshtml" />
@@ -340,6 +342,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Models\ViewModels\LoginStatViewModel.cs" />
     <Compile Include="Controllers\ProductDetailController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -358,6 +361,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_AdminHeader.cshtml" />
+    <Content Include="Views\Home\AdminDashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

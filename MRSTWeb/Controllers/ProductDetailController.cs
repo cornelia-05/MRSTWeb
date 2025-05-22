@@ -11,13 +11,13 @@ namespace MRSTWeb.Controllers
 {
 	public class ProductDetailController : Controller
 	{
-        private readonly IProduct _product;
+        private  IProduct _product;
            
         public ProductDetailController()
         {
-
                var logic = new LogicProvider();
-               var session = logic.GetsessionBL();
+            _product = logic.GetProductBL();
+            var session = logic.GetsessionBL();
         }
         public ActionResult Index()
         {

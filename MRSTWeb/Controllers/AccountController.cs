@@ -35,11 +35,20 @@ namespace MRSTWeb.Controllers
                {
                     var user = _context.Users.FirstOrDefault(u => u.Credential == model.Email);
                     if (user != null && BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+                    { 
+                    user.LastLogin = DateTime.Now;
+                    user.LoginCount += 1;
+                    if (string.IsNullOrEmpty(user.Email))
                     {
+                        user.Email = user.Credential;
+                    }
+
+                    _context.SaveChanges();
                          Session["UserKey"] = Guid.NewGuid().ToString();
                          Session["Email"] = user.Credential;
+                   
 
-                         if (user.Role == LevelAcces.Admin)
+                    if (user.Role == LevelAcces.Admin)
                          {
                               Session["IsAdmin"] = true;
                          }
@@ -68,15 +77,19 @@ namespace MRSTWeb.Controllers
           }
 
           // SignUp Action (POST)
+
           [HttpPost]
           [ValidateAntiForgeryToken]
           public ActionResult SignUp(RegisterViewModel model)
           {
+
                if (ModelState.IsValid)
                {
                     if (_context.Users.Any(u => u.Credential == model.Email))
                     {
-                         ModelState.AddModelError("Email", "Email is already registered.");
+            
+
+                    ModelState.AddModelError("Email", "Email is already registered.");
                          return View(model);
                     }
 
@@ -84,17 +97,19 @@ namespace MRSTWeb.Controllers
                     {
                          Credential = model.Email,
                          Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                         Role = LevelAcces.User
+                         Role = LevelAcces.User,
+                        LastLogin = DateTime.Now
                     };
 
                     _context.Users.Add(user);
                     _context.SaveChanges();
 
                     return RedirectToAction("SignIn");
-               }
 
+               }
                return View(model);
           }
+
 
           [HttpPost]
           [ValidateAntiForgeryToken]
@@ -107,4 +122,15 @@ namespace MRSTWeb.Controllers
           }
 
      }
+    public class AdminController : Controller
+    {
+        // GET: Admin
+        public ActionResult Dashboard()
+        {
+            return View();
+        }
+ 
+}
+
+    
 }

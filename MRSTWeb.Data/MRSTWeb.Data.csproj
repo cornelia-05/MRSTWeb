@@ -56,6 +56,18 @@
     <Compile Include="Migrations\202505202258150_UserList.Designer.cs">
       <DependentUpon>202505202258150_UserList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505221308167_InitialCreate.cs" />
+    <Compile Include="Migrations\202505221308167_InitialCreate.Designer.cs">
+      <DependentUpon>202505221308167_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505221324049_SyncULoginDataModel.cs" />
+    <Compile Include="Migrations\202505221324049_SyncULoginDataModel.Designer.cs">
+      <DependentUpon>202505221324049_SyncULoginDataModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202505221607481_AddLoginCount.cs" />
+    <Compile Include="Migrations\202505221607481_AddLoginCount.Designer.cs">
+      <DependentUpon>202505221607481_AddLoginCount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -73,6 +85,18 @@
     <EmbeddedResource Include="Migrations\202505202258150_UserList.resx">
       <DependentUpon>202505202258150_UserList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505221308167_InitialCreate.resx">
+      <DependentUpon>202505221308167_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505221324049_SyncULoginDataModel.resx">
+      <DependentUpon>202505221324049_SyncULoginDataModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505221607481_AddLoginCount.resx">
+      <DependentUpon>202505221607481_AddLoginCount.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -14,5 +14,8 @@ namespace MRSTWeb.Domain.Entities.User
           public string Password { get; set; }
           public LevelAcces Role { get; set; }
           public string SessionKey { get; set; }
-     }
+        public DateTime LastLogin { get; set; }
+        public string Email { get; set; }
+        public int LoginCount { get; set; } = 0;
+    }
 }
