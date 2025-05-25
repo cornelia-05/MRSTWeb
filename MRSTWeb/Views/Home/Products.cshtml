@@ -1,254 +1,32 @@
+@model List<MRSTWeb.Domain.Entities.Product.Service>
 @{
-     Layout = "~/Views/Shared/_Layout.cshtml"; 
-     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Our Services";
 }
 
-<header class="site-header section-padding d-flex justify-content-center align-items-center">
-     <div class="container">
-          <div class="row">
-
-               <div class="col-lg-10 col-12">
-                    <h1>
-                         <span class="d-block text-primary">Find</span>
-                         <span class="d-block text-dark">our services</span>
-                    </h1>
-               </div>
-          </div>
-     </div>
-</header>
-
 <section class="products section-padding">
-     <div class="container">
-          <div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-5">Our Services</h2>
+            </div>
 
-               <div class="col-12">
-                    <h2 class="mb-5">Our services </h2>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
+            @foreach (var product in Model)
+            {
+                <div class="col-lg-4 col-12 mb-3">
                     <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/living.jpg" class="img-fluid product-image" alt="">
-                         </a>
+                        <img src="@product.ImagePath" class="img-fluid product-image" alt="@product.Name" />
 
-                         <div class="product-top d-flex">
-                              <span class="product-alert me-auto">New</span>
-                              <a href="#" class="bi-heart-fill product-icon"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Living</a>
-                                   </h5>
-                              </div>
-                              <small class="product-price text-muted ms-auto">from 20$</small>
-                         </div>
+                        <div class="product-info d-flex mt-2">
+                            <div>
+                                <h5 class="product-title mb-0">@product.Name</h5>
+                                <p class="product-p">@product.Description</p>
+                            </div>
+                            <small class="product-price text-muted ms-auto">From $@product.Price</small>
+                        </div>
                     </div>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/bucatarie.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <span class="product-alert me-auto">New</span>
-                              <a href="#" class="bi-heart-fill product-icon"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Kitchen</a>
-                                   </h5>
-                              </div>
-                              <small class="product-price text-muted ms-auto">from $25</small>
-                         </div>
-                    </div>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/dormitor.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <span class="product-alert me-auto">New</span>
-                              <a href="#" class="bi-heart-fill product-icon"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Bedroom</a>
-                                   </h5>
-                              </div>
-                              <small class="product-price text-muted ms-auto">from 15$</small>
-                         </div>
-                    </div>
-               </div>
-
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/baie.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <span class="product-alert me-auto">New</span>
-                              <a href="#" class="bi-heart-fill product-icon"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Bathroom</a>
-                                   </h5>
-                              </div>
-                              <small class="product-price text-muted ms-auto">from 20$</small>
-                         </div>
-                    </div>
-               </div>
-
-
-
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/mansarda.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <span class="product-alert me-auto">New</span>
-
-                              <a href="#" class="bi-heart-fill product-icon"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Balcony</a>
-                                   </h5>
-
-                              </div>
-
-                              <small class="product-price text-muted ms-auto">from $20</small>
-                         </div>
-                    </div>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/cameramasina.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <span class="product-alert">New</span>
-
-                              <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Store room</a>
-                                   </h5>
-                              </div>
-
-                              <small class="product-price text-muted ms-auto">from $15</small>
-                         </div>
-                    </div>
-               </div>
-
-
-
-               <div class="col-12">
-                    <h2 class="mb-5">Products</h2>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/plitka.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <span class="product-alert">Trending</span>
-
-                              <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                         </div>
-
-
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Tiles</a>
-                                   </h5>
-
-                                   <p class="product-p">Original package design from house</p>
-                              </div>
-
-                              <small class="product-price text-muted ms-auto">From mk$50</small>
-                         </div>
-                    </div>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/tigla.jpg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Roof</a>
-                                   </h5>
-
-                                   <p class="product-p">Package design</p>
-                              </div>
-
-                              <small class="product-price text-muted ms-auto">From $10</small>
-                         </div>
-                    </div>
-               </div>
-
-               <div class="col-lg-4 col-12 mb-3">
-                    <div class="product-thumb">
-                         <a href="product-detail.html">
-                              <img src="~/images/laminat.jpeg" class="img-fluid product-image" alt="">
-                         </a>
-
-                         <div class="product-top d-flex">
-                              <a href="#" class="bi-heart-fill product-icon ms-auto"></a>
-                         </div>
-
-                         <div class="product-info d-flex">
-                              <div>
-                                   <h5 class="product-title mb-0">
-                                        <a href="product-detail.html" class="product-title-link">Laminat</a>
-                                   </h5>
-
-                                   <p class="product-p">Original design from house</p>
-                              </div>
-
-                              <small class="product-price text-muted ms-auto">From $2</small>
-                         </div>
-                    </div>
-               </div>
-
-          </div>
-     </div>
+                </div>
+            }
+        </div>
+    </div>
 </section>
-

@@ -68,6 +68,10 @@
     <Compile Include="Migrations\202505221607481_AddLoginCount.Designer.cs">
       <DependentUpon>202505221607481_AddLoginCount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202505251527396_CreateServicesTable.cs" />
+    <Compile Include="Migrations\202505251527396_CreateServicesTable.Designer.cs">
+      <DependentUpon>202505251527396_CreateServicesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202505221607481_AddLoginCount.resx">
       <DependentUpon>202505221607481_AddLoginCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202505251527396_CreateServicesTable.resx">
+      <DependentUpon>202505251527396_CreateServicesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

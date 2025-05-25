@@ -26,7 +26,7 @@ namespace MRSTWeb.Controllers
         [HttpPost]
         public ActionResult GetProduct(int id)
         {
-            var product = _product.GetDetailProduct(id);
+            var product = _product.GetById(id);
             if (product == null)
             {
                 return HttpNotFound("product not found");

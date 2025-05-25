@@ -15,12 +15,19 @@ using MRSTWeb.Domain.Entities.User.Global;
 using System.Windows.Forms;
 using System.Data.Entity;
 using MRSTWeb.Models.ViewModels;
+using System.IO;
+using MRSTWeb.BusinessLogic;
 
 namespace MRSTWeb.Controllers
 {
      public class HomeController : Controller
      {
-        private object products;
+        private  IProduct _product;
+        public HomeController()
+        {
+            _product = new ProductBL(); // Or use LogicProvider if needed
+        }
+
 
         public ActionResult Index()
           {
@@ -55,7 +62,8 @@ namespace MRSTWeb.Controllers
           }
           public ActionResult Products()
           {
-               return View();
+            var products = _product.GetAll();
+            return View(products);
           }
         public ActionResult AdminDashboard()
         {
@@ -103,15 +111,27 @@ namespace MRSTWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddProduct(Service product)
+        public ActionResult AddProduct(Service product, HttpPostedFileBase imageFile)
         {
-            using (var db = new DBContext())
+            if (imageFile != null && imageFile.ContentLength > 0)
             {
-                db.Services.Add(product);
-                db.SaveChanges();
-                return RedirectToAction("AdminDashboard");
+                string fileName = Path.GetFileName(imageFile.FileName);
+                string path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
+                string folderPath = Server.MapPath("~/images/");
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                imageFile.SaveAs(path);
+
+                product.ImagePath = "/Content/Images/" + fileName;
             }
+
+            _product.Add(product); // Use BL method
+            return RedirectToAction("AdminDashboard");
         }
+
         public ActionResult DeleteProduct(int id)
         {
             using (var db = new DBContext())

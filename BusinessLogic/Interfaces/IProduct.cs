@@ -1,14 +1,14 @@
-﻿using System;
+﻿using MRSTWeb.Domain.Entities.Product;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MRSTWeb.Domain.Entities.Product;
 
 namespace MRSTWeb.BusinessLogic.Interfaces
 {
-   public interface  IProduct
+    public interface IProduct
     {
-        ProductDetail GetDetailProduct(int id);
+        List<Service> GetAll();
+        Service GetById(int id);
+        void Add(Service product);           // ✅ This is what's missing
+        void Update(Service product);
+        void Delete(int id);
     }
 }

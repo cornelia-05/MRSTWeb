@@ -15,9 +15,10 @@
 <canvas id="loginChart" width="800" height="50"></canvas>
 
 <h2 class="mt-5">🛒 Products</h2>
-<table class="table table-bordered bi-align-center">
+<table class="table table-bordered">
     <thead>
         <tr>
+            <th>Image</th>
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
@@ -28,6 +29,7 @@
         @foreach (var product in Model)
         {
             <tr>
+                <td><img src="@product.ImagePath" width="80" /></td>
                 <td>@product.Name</td>
                 <td>@product.Description</td>
                 <td>@product.Price</td>
@@ -39,6 +41,7 @@
         }
     </tbody>
 </table>
+
 
 <a href="@Url.Action("AddProduct", "Home")" class="btn btn-success">Add New Product</a>
 
