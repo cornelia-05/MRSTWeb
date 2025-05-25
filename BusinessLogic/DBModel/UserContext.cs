@@ -15,7 +15,7 @@ namespace BusinessLogic
      public class UserContext : DBContext
      {
           public new  DbSet<ULoginData> Users { get; set; }
-          public DbSet<Service> Services { get; set; }
+          public new DbSet<Service> Services { get; set; }
 
           protected override void OnModelCreating(DbModelBuilder modelBuilder)
           {

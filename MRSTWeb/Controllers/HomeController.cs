@@ -63,7 +63,7 @@ namespace MRSTWeb.Controllers
             {
                 var logins = db.Users
               .Where(u => u.LoginCount > 0) // Optional: filter out unused
-            .GroupBy(u => u.Email ?? u.Credential)
+              .GroupBy(u => u.Email ?? u.Credential)
                 .Select(g => new LoginStatViewModel
                 {
                     Email = g.Key,

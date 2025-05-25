@@ -17,7 +17,7 @@ namespace MRSTWeb.Data.Context
           }
 
           public DbSet<ULoginData> Users { get; set; }
-        public DbSet<Service> Services { get; set; }
+          public DbSet<Service> Services { get; set; }
     }
 
      public class ApplicationDbInitializer

@@ -43,7 +43,7 @@ namespace MRSTWeb.Controllers
                         user.Email = user.Credential;
                     }
 
-                    _context.SaveChanges();
+                         _context.SaveChanges();
                          Session["UserKey"] = Guid.NewGuid().ToString();
                          Session["Email"] = user.Credential;
                    
