@@ -244,6 +244,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Entities\Contact\ContactMessage.cs" />
     <Compile Include="Entities\Product\ProductDetail.cs" />
     <Compile Include="Entities\Product\Service.cs" />
     <Compile Include="Entities\User\Global\ActionStatus.cs" />

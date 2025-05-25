@@ -1,0 +1,42 @@
+﻿@model List<MRSTWeb.Models.CartItem>
+
+@{
+    ViewBag.Title = "Your Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Your Cart</h2>
+
+<div class="container mt-4">
+    @foreach (var item in Model)
+    {
+        <div class="row border rounded p-3 mb-3 shadow-sm align-items-center">
+            <div class="col-md-2 text-center">
+                <img src="@item.Product.ImagePath" class="img-fluid rounded" />
+            </div>
+            <div class="col-md-6">
+                <h5>@item.Product.Name</h5>
+                <p>Quantity: @item.Quantity</p>
+                <p>Price: @item.Product.Price.ToString("C")</p>
+                <p>Total: @( (item.Product.Price * item.Quantity).ToString("C") )</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="@Url.Action("Remove", "Cart", new { id = item.Product.Id })" class="btn btn-danger">Remove</a>
+            </div>
+        </div>
+    }
+
+    <div class="text-center mt-4">
+        <h4>
+            Total:
+            <span class="fw-bold text-primary">
+                @Model.Sum(i => i.Product.Price * i.Quantity).ToString("C")
+            </span>
+        </h4>
+    </div>
+
+    <div class="text-center mt-3">
+        <a href="@Url.Action("Clear", "Cart")" class="btn btn-warning me-2">Clear Cart</a>
+        <a href="@Url.Action("Checkout", "Cart")" class="btn btn-primary">Proceed to Checkout</a>
+    </div>
+</div>

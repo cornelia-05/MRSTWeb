@@ -1,7 +1,8 @@
 ﻿@using MRSTWeb.Models.ViewModels
 @{
-    var logins = ViewBag.LoginStats as List<LoginStatViewModel>;
+    var logins = ViewBag.LoginStats as List<LoginStatViewModel> ?? new List<LoginStatViewModel>();
 }
+
 
 @model List<MRSTWeb.Domain.Entities.Product.Service>
 
@@ -9,6 +10,11 @@
     ViewBag.Title = "Admin Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<style>
+    body {
+        padding-top: 200px;
+    }
+</style>
 
 
 <h1>📊 User Login Activity</h1>
@@ -44,6 +50,8 @@
 
 
 <a href="@Url.Action("AddProduct", "Home")" class="btn btn-success">Add New Product</a>
+<a href="@Url.Action("AdminMessages", "Home")" class="btn btn-info">View Contact Messages</a>
+
 
 @section scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

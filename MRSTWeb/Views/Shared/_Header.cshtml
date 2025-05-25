@@ -11,40 +11,50 @@
 
 
           <div class="collapse navbar-collapse" id="navbarNav">
-               <ul class="navbar-nav mx-auto">
-                   <li class="nav-item">
-                       @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
-                   </li>
-                    <li class="nav-item">
-                         @Html.ActionLink("About us", "About", "Home", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                         @Html.ActionLink("Services", "Products", "Home", null, new { @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="@Url.Action("Faq", "Home")">FAQs</a>
-                    </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="@Url.Action("Contact", "Home")">Contacts</a>
-                    </li>
-               </ul>
+              <ul class="navbar-nav mx-auto">
+                  <li class="nav-item">
+                      @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                  </li>
+                  <li class="nav-item">
+                      @Html.ActionLink("About us", "About", "Home", null, new { @class = "nav-link" })
+                  </li>
+                  <li class="nav-item">
+                      @Html.ActionLink("Products", "Products", "Home", null, new { @class = "nav-link" })
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="@Url.Action("Faq", "Home")">FAQs</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="@Url.Action("Contact", "Home")">Contacts</a>
+                  </li>
+                  <li>
+                   
 
-               <div class="d-none d-lg-block">
+                  </li>
 
-                    @if (Session["UserKey"] != null)
-                    {
-                         <form action="@Url.Action("Logout", "Account")" method="post">
-                              @Html.AntiForgeryToken()
-                              <button type="submit" class="btn btn-danger">Logout</button>
-                         </form>
-                    }
-                    else
-                    {
-                         <a class="nav-link" href="@Url.Action("SignIn", "Account")"><i class="bi bi-person-badge-fill"></i></a>
-                    }
+              </ul>
 
-                    <a class="nav-link" href="@Url.Action("Cart", "Home")"><i class="bi bi-bag custom-icon"></i></a>
-               </div>
+              <div class="d-none d-lg-block">
+
+                  @if (Session["UserKey"] != null)
+                  {
+                      <form action="@Url.Action("Logout", "Account")" method="post">
+                          @Html.AntiForgeryToken()
+                          <button type="submit" class="btn btn-danger">Logout</button>
+                      </form>
+                  }
+                  else
+                  {
+                      <a class="nav-link" href="@Url.Action("SignIn", "Account")"><i class="bi bi-person-badge-fill"></i></a>
+                  }
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                      <a href="@Url.Action("Index", "Cart")">
+                          <i class="bi bi-cart" style="font-size: 1.5rem;"></i>
+                      </a>
+                  </div>
+
+
+              </div>
           </div>
      </div>
 </nav>

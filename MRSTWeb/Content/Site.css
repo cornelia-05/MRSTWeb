@@ -15,4 +15,10 @@ select,
 textarea {
     max-width: 280px;
 }
+.btn-cart {
+    background-color: #6f42c1;
+    color: white;
+    border: none;
+}
+
 

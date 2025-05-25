@@ -1,32 +1,62 @@
-@model List<MRSTWeb.Domain.Entities.Product.Service>
+﻿@model List<MRSTWeb.Domain.Entities.Product.Service>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Our Services";
+    ViewData["Title"] = "Our Products";
 }
 
 <section class="products section-padding">
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2 class="mb-5">Our Services</h2>
+                <h2 class="mb-5">Our Products</h2>
             </div>
 
             @foreach (var product in Model)
             {
                 <div class="col-lg-4 col-12 mb-3">
                     <div class="product-thumb">
-                        <img src="@product.ImagePath" class="img-fluid product-image" alt="@product.Name" />
+                        <a href="@Url.Action("Product_detail", "Home")">
+                            <img src="@product.ImagePath" class="img-fluid product-image" alt="@product.Name" />
+                        </a>
 
-                        <div class="product-info d-flex mt-2">
+                        <div class="product-top d-flex">
+                            <span class="product-alert me-auto">New</span>
+                            <a href="#" class="bi-heart-fill product-icon"></a>
+                        </div>
+
+                        <div class="product-info d-flex">
                             <div>
-                                <h5 class="product-title mb-0">@product.Name</h5>
+                                <h5 class="product-title mb-0">
+                                    <a href="@Url.Action("Product_detail", "Home")" class="product-title-link">@product.Name</a>
+                                </h5>
                                 <p class="product-p">@product.Description</p>
                             </div>
                             <small class="product-price text-muted ms-auto">From $@product.Price</small>
                         </div>
+
+                        <div class="mt-2">
+                            <button class="btn btn-cart add-to-cart" data-id="@product.Id">Add to Cart</button>
+
+                        </div>
                     </div>
                 </div>
+
             }
+
         </div>
     </div>
 </section>
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).on("click", ".add-to-cart", function () {
+            var productId = $(this).data("id");
+
+            $.post("/Cart/AddToCart", { id: productId }, function () {
+                alert("Item added to cart!");
+                // Optionally update cart icon count via Ajax here
+            });
+        });
+    </script>
+}
+

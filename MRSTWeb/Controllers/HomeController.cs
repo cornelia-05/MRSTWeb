@@ -17,6 +17,8 @@ using System.Data.Entity;
 using MRSTWeb.Models.ViewModels;
 using System.IO;
 using MRSTWeb.BusinessLogic;
+using MRSTWeb.Domain.Entities.Contact;
+
 
 namespace MRSTWeb.Controllers
 {
@@ -70,21 +72,20 @@ namespace MRSTWeb.Controllers
             using (var db = new DBContext())
             {
                 var logins = db.Users
-              .Where(u => u.LoginCount > 0) // Optional: filter out unused
-              .GroupBy(u => u.Email ?? u.Credential)
-                .Select(g => new LoginStatViewModel
-                {
-                    Email = g.Key,
-                    Count = g.Sum(u => u.LoginCount)
-                }).ToList();
+                    .Where(u => u.LoginCount > 0)
+                    .GroupBy(u => u.Email ?? u.Credential)
+                    .Select(g => new LoginStatViewModel
+                    {
+                        Email = g.Key,
+                        Count = g.Sum(u => u.LoginCount)
+                    }).ToList();
 
                 var products = db.Services.ToList();
-                ViewBag.LoginStats = logins;
 
+                ViewBag.LoginStats = logins;
                 return View(products);
             }
         }
-
 
         public ActionResult EditProduct(int id)
         {
@@ -96,15 +97,34 @@ namespace MRSTWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditProduct(Service updatedProduct)
+        public ActionResult EditProduct(Service product, HttpPostedFileBase imageFile)
         {
             using (var db = new DBContext())
             {
-                db.Entry(updatedProduct).State = EntityState.Modified;
+                var existing = db.Services.Find(product.Id);
+                if (existing == null)
+                    return HttpNotFound();
+
+                existing.Name = product.Name;
+                existing.Description = product.Description;
+                existing.Price = product.Price;
+
+                if (imageFile != null && imageFile.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(imageFile.FileName);
+                    string imagePath = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
+                    imageFile.SaveAs(imagePath);
+
+                    existing.ImagePath = "/Content/images/" + fileName;
+                }
+
                 db.SaveChanges();
-                return RedirectToAction("AdminDashboard");
             }
+
+            return RedirectToAction("AdminDashboard");
         }
+
+
         public ActionResult AddProduct()
         {
             return View();
@@ -117,7 +137,7 @@ namespace MRSTWeb.Controllers
             {
                 string fileName = Path.GetFileName(imageFile.FileName);
                 string path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
-                string folderPath = Server.MapPath("~/images/");
+                string folderPath = Server.MapPath("~/Content/images/");
                 if (!Directory.Exists(folderPath))
                 {
                     Directory.CreateDirectory(folderPath);
@@ -144,6 +164,77 @@ namespace MRSTWeb.Controllers
                 }
                 return RedirectToAction("AdminDashboard");
             }
+        }
+        public ActionResult AdminMessages()
+        {
+            if (TempData["ContactMessages"] != null)
+            {
+                ViewBag.ContactMessages = TempData["ContactMessages"];
+            }
+            else
+            {
+                // fallback if nothing in TempData
+                ViewBag.ContactMessages = HomeController.ContactMessages ?? new List<ContactMessageViewModel>();
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactMessageViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var db = new DBContext())
+                {
+                    var message = new ContactMessage
+                    {
+                        Name = model.Name,
+                        Email = model.Email,
+                        Subject = model.Subject,
+                        Message = model.Message
+                    };
+
+                    db.ContactMessages.Add(message);
+                    db.SaveChanges();
+
+                    // Add to static in-memory list for UI
+                    ContactMessages.Add(new ContactMessageViewModel
+                    {
+                        Name = model.Name,
+                        Email = model.Email,
+                        Subject = model.Subject,
+                        Message = model.Message,
+                        SubmittedAt = DateTime.Now
+                    });
+
+                }
+
+                ViewBag.Message = "Thank you! We’ll get back to you soon.";
+                return RedirectToAction("Contact");
+            }
+
+            return View(model);
+        }
+        
+      
+        public static List<ContactMessageViewModel> ContactMessages = new List<ContactMessageViewModel>();
+
+        [HttpPost]
+        public ActionResult SubmitContact(string Name, string Email, string Subject, string Message)
+        {
+            ContactMessages.Add(new ContactMessageViewModel
+            {
+                Name = Name,
+                Email = Email,
+                Subject = Subject,
+                Message = Message,
+                SubmittedAt = DateTime.Now
+            });
+
+            TempData["SuccessMessage"] = "Thank you for your message!";
+            return RedirectToAction("Contact");
         }
 
 

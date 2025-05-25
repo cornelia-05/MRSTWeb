@@ -1,0 +1,75 @@
+﻿@model List<MRSTWeb.Models.ViewModels.ContactMessageViewModel>
+
+@{
+    ViewBag.Title = "Contact Messages";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>📨 Contact Messages</h2>
+
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th>Submitted</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var msg in ViewBag.ContactMessages)
+        {
+            <tr>
+                <td>@msg.SubmittedAt.ToString("g")</td>
+                <td>@msg.Name</td>
+                <td>@msg.Email</td>
+                <td>@msg.Subject</td>
+                <td>@msg.Message</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h2 class="mt-5">📩 Contact Messages</h2>
+
+@if (ViewBag.ContactMessages != null && ViewBag.ContactMessages.Count > 0)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Submitted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.ContactMessages != null)
+            {
+                foreach (var msg in ViewBag.ContactMessages)
+                {
+                    <tr>
+                        <td>@msg.SubmittedAt.ToString("g")</td>
+                        <td>@msg.Name</td>
+                        <td>@msg.Email</td>
+                        <td>@msg.Subject</td>
+                        <td>@msg.Message</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-muted text-center">No messages to show.</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+else
+{
+    <p class="text-muted">No messages yet.</p>
+}
+

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MRSTWeb.Domain.Entities.User;
 using MRSTWeb.Domain.Enums;
 using MRSTWeb.Domain.Entities.Product;
+using MRSTWeb.Domain.Entities.Contact;
 
 namespace MRSTWeb.Data.Context
 {
@@ -18,9 +19,11 @@ namespace MRSTWeb.Data.Context
 
           public DbSet<ULoginData> Users { get; set; }
           public DbSet<Service> Services { get; set; }
+        public DbSet<ContactMessage> ContactMessages { get; set; }
+
     }
 
-     public class ApplicationDbInitializer
+    public class ApplicationDbInitializer
      {
         public DateTime LastLogin { get; set; }
 

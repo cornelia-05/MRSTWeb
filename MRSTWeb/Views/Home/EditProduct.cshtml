@@ -5,27 +5,78 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Edit Product</h2>
+<style>
+    .edit-container {
+        padding-top: 100px;
+    }
 
-@using (Html.BeginForm("EditProduct", "Home", FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.Id)
+    .edit-label {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    .edit-input, .edit-textarea {
+        font-size: 1.1rem;
+    }
+
+    .current-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+    }
+
+    .form-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="container edit-container">
+    <div class="row">
+        <!-- Left: Form -->
+        <div class="col-md-6">
+            <div class="form-title">Edit Product</div>
+
+            @using (Html.BeginForm("EditProduct", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.Id)
+                @Html.HiddenFor(m => m.ImagePath)
+
+                <div class="mb-3">
+                    <label class="edit-label">Name</label>
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control edit-input" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="edit-label">Description</label>
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control edit-textarea", rows = 3 })
+                </div>
+
+                <div class="mb-3">
+                    <label class="edit-label">Price</label>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control edit-input", type = "number", step = "0.01" })
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <a href="@Url.Action("AdminDashboard", "Home")" class="btn btn-secondary">Cancel</a>
+                </div>
+            }
+        </div>
+
+        <!-- Right: Image -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <span class="edit-label">Current Image</span><br />
+                <img src="@Model.ImagePath" alt="Product Image" class="current-image mb-3" />
+            </div>
+
+            <div class="mb-3">
+                <label class="edit-label">Change Image</label>
+                <input type="file" name="imageFile" class="form-control" />
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Description)
-        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(m => m.Price)
-        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number", step = "0.01" })
-    </div>
-
-    <button type="submit" class="btn btn-primary">Update</button>
-    <a href="@Url.Action("AdminDashboard", "Home")" class="btn btn-secondary">Cancel</a>
-}
+</div>
