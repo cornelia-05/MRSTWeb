@@ -1,104 +1,101 @@
+@{
+     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="site-header section-padding-img site-header-image">
+     <div class="container">
+          <div class="row">
 
-            <header class="site-header section-padding-img site-header-image">
-                <div class="container">
+               <div class="col-lg-10 col-12 header-info">
+                    <h1>
+                         <span class="d-block text-primary">Tell us hello</span>
+                         <span class="d-block text-dark">We are waiting</span>
+                    </h1>
+               </div>
+          </div>
+     </div>
+
+     <img src="~/Content/images/header/positive-european-woman-has-break-after-work.jpg" class="header-image img-fluid" alt="">
+</header>
+
+<section class="contact section-padding">
+     <div class="container">
+          <div class="row">
+
+               <div class="col-lg-3 col-12">
+                    <h2 class="mb-4">Let's <span>begin</span></h2>
+
+                    <form class="contact-form me-lg-5 pe-lg-3" role="form">
+
+                         <div class="form-floating mx-auto" style="width: 300px;">
+                              <input type="text" name="name" id="name" class="form-control" placeholder="Name, surname" required>
+                              <label for="name">Name, surname</label>
+                         </div>
+
+                         <div class="form-floating mx-auto my-4" style="width: 300px;">
+                              <input type="email" name="email" id="email" class="form-control" placeholder="Email" required>
+                              <label for="email">Email</label>
+                         </div>
+
+                         <div class="form-floating mx-auto my-4" style="width: 300px;">
+                              <input type="text" name="subject" id="subject" class="form-control" placeholder="Subject" required>
+                              <label for="subject">Subject</label>
+                         </div>
+
+                         <div class="form-floating mx-auto mb-4" style="width: 300px;">
+                              <textarea id="message" name="message" class="form-control" placeholder="Tell about your ideas" required style="height: 160px"></textarea>
+                              <label for="message">Tell about your ideas</label>
+                         </div>
+
+                         <button type="submit" class="btn custom-btn form-control mt-4 mb-3">
+                              Send
+                         </button>
+
+                    </form>
+               </div>
+
+               <div class="col-lg-6 col-12 mt-5 ms-auto">
                     <div class="row">
+                         <div class="col-6 border-end contact-info">
+                              <h6 class="mb-3">CL Modern Concepts</h6>
 
-                        <div class="col-lg-10 col-12 header-info">
-                            <h1>
-                                <span class="d-block text-primary">Tell us hello</span>
-                                <span class="d-block text-dark">We are waiting</span>
-                            </h1>
-                        </div>
+                              <a href="mailto:hello@company.com" class="custom-link">
+                                   cl@mail.com
+                                   <i class="bi-arrow-right ms-2"></i>
+                              </a>
+                         </div>
+
+                         <div class="col-6 contact-info">
+                              <h6 class="mb-3">Studio principal</h6>
+
+                              <a href="mailto:studio@company.com" class="custom-link">
+                                   clstudio@mail.com
+                                   <i class="bi-arrow-right ms-2"></i>
+                              </a>
+                         </div>
+
+                         <div class="col-6 border-top border-end contact-info">
+                              <h6 class="mb-3">Our address</h6>
+
+                              <p class="text-muted">S. Studentilor 7, Chisinau, Moldova</p>
+                         </div>
+
+                         <div class="col-6 border-top contact-info">
+                              <h6 class="mb-3">Social</h6>
+
+                              <ul class="social-icon">
+
+                                   <li><a href="#" class="social-icon-link bi-messenger"></a></li>
+
+                                   <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                                   <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                                   <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                              </ul>
+                         </div>
                     </div>
-                </div>
+               </div>
 
-                <img src="~/images/header/positive-european-woman-has-break-after-work.jpg" class="header-image img-fluid" alt="">
-            </header>
-
-            <section class="contact section-padding">
-                <div class="container">
-                    <div class="row">
-                        
-                        <div class="col-lg-6 col-12">
-                            <h2 class="mb-4">Let's <span>begin</span></h2>
-
-                            <form class="contact-form me-lg-5 pe-lg-3" role="form">
-
-                                <div class="form-floating">
-                                    <input type="text" name="name" id="name" class="form-control" placeholder="Full name" required>
-
-                                    <label for="name">Name, surname </label>
-                                </div>
-
-                                <div class="form-floating my-4">
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required>
-
-
-                                    <label for="email">Email</label>
-                                </div>
-                                
-                                <div class="form-floating my-4">
-                                    <input type="subject" name="subject" id="subject"class="form-control" placeholder="Subject" required>
-
-                                    <label for="subject">Subject</label>
-                                </div>
-
-                                <div class="form-floating mb-4">
-                                    <textarea id="message" name="message" class="form-control" placeholder="Leave a comment here" required style="height: 160px"></textarea>
-
-                                    <label for="message">Tell about your ideas</label>
-                                </div>
-
-                                <div class="col-lg-5 col-6">
-                                    <button type="submit" class="form-control">Send</button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="col-lg-6 col-12 mt-5 ms-auto">
-                            <div class="row">
-                                <div class="col-6 border-end contact-info">
-                                    <h6 class="mb-3">CL Modern Concepts</h6>
-
-                                    <a href="mailto:hello@company.com" class="custom-link">
-                                        cl@mail.com
-                                        <i class="bi-arrow-right ms-2"></i>
-                                    </a>
-                                </div>
-
-                                <div class="col-6 contact-info">
-                                	<h6 class="mb-3">Studio principal</h6>
-
-                                    <a href="mailto:studio@company.com" class="custom-link">
-                                        clstudio@mail.com
-                                        <i class="bi-arrow-right ms-2"></i>
-                                    </a>
-                                </div>
-
-                                <div class="col-6 border-top border-end contact-info">
-                                    <h6 class="mb-3">Our address</h6>
-
-                                    <p class="text-muted">S. Studentilor 7, Chisinau, Moldova</p>
-                                </div>
-
-                                <div class="col-6 border-top contact-info">
-                                    <h6 class="mb-3">Social</h6>
-
-                                    <ul class="social-icon">
-
-                                        <li><a href="#" class="social-icon-link bi-messenger"></a></li>
-
-                                        <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-
-                                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                        <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-       
+          </div>
+     </div>
+</section>

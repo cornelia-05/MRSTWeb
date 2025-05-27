@@ -24,8 +24,9 @@ public class BundleConfig
           ));
 
           bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.bundle.min.js"
-          ));
+                     "~/Scripts/bootstrap.bundle.min.js"
+           ));
+
 
           bundles.Add(new ScriptBundle("~/bundles/custom").Include(
                       "~/Scripts/Headroom.js",

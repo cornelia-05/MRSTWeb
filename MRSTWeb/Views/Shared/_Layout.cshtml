@@ -6,70 +6,72 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <base href="~/" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="@ViewBag.MetaDescription">
-    <meta name="author" content="CL Design">
-    <title>@ViewBag.Title - CL Design</title>
+     <meta charset="UTF-8">
+     <base href="~/" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description" content="@ViewBag.MetaDescription">
+     <meta name="author" content="CL Design">
+     <title>@ViewBag.Title - CL Design</title>
 
 
 
-    <!-- Styles -->
-    @Styles.Render("~/Content/css")
+     <!-- Styles -->
+     @Styles.Render("~/Content/css")
 
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+     <!-- Google Fonts -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<!-- Toast container -->
-<div id="messageBox" class="alert alert-success"
-     style="display: none; position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
-    Item added to cart!
-</div>
-
-<!-- Toast message container -->
-<div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: none;">
-    <div id="toast-message" class="alert alert-success"></div>
-</div>
-<script>
-    // Check for query string
-    const urlParams = new URLSearchParams(window.location.search);
-    const added = urlParams.get('added');
-    if (added) {
-        showToast(`${decodeURIComponent(added)} added to cart!`);
-    }
-
-    function showToast(message) {
-        const toastContainer = document.getElementById("toast-container");
-        const toastMessage = document.getElementById("toast-message");
-        toastMessage.textContent = message;
-        toastContainer.style.display = "block";
-
-        setTimeout(() => {
-            toastContainer.style.display = "none";
-        }, 3000);
-    }
-</script>
-
-
 <body>
-    @Html.Partial("_Header")
+     <!-- Toast container -->
+     <div id="messageBox" class="alert alert-success"
+          style="display: none; position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+          Item added to cart!
+     </div>
 
-    <main role="main">
-        @RenderBody()
-    </main>
+     <!-- Toast message container -->
+     <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: none;">
+          <div id="toast-message" class="alert alert-success"></div>
+     </div>
 
-    @Html.Partial("_Footer")
+     <script>
+          // Check for query string
+          const urlParams = new URLSearchParams(window.location.search);
+          const added = urlParams.get('added');
+          if (added) {
+               showToast(`${decodeURIComponent(added)} added to cart!`);
+          }
 
-    <!-- Scripts -->
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap.min")
-    @Scripts.Render("~/bundles/custom")
-    @RenderSection("scripts", false)
+          function showToast(message) {
+               const toastContainer = document.getElementById("toast-container");
+               const toastMessage = document.getElementById("toast-message");
+               toastMessage.textContent = message;
+               toastContainer.style.display = "block";
+
+               setTimeout(() => {
+                    toastContainer.style.display = "none";
+               }, 3000);
+          }
+     </script>
+
+
+     @Html.Partial("_Header")
+
+     <main role="main">
+          @RenderBody()
+     </main>
+
+     @Html.Partial("_Footer")
+
+     <!-- Scripts -->
+     @Scripts.Render("~/bundles/jquery")
+     @Scripts.Render("~/bundles/bootstrap.min")
+     @Scripts.Render("~/bundles/custom")
+     @RenderSection("scripts", false)
 </body>
 </html>

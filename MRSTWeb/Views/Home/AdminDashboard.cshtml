@@ -1,61 +1,52 @@
-﻿@using MRSTWeb.Models.ViewModels
+﻿@model List<MRSTWeb.Domain.Entities.Product.Service>
+@using MRSTWeb.Models.ViewModels
 @{
-    var logins = ViewBag.LoginStats as List<LoginStatViewModel> ?? new List<LoginStatViewModel>();
+     var logins = ViewBag.LoginStats as List<LoginStatViewModel> ?? new List<LoginStatViewModel>();
+     ViewBag.Title = "Admin Dashboard";
+     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<section class="d-flex justify-content-center align-items-center min-vh-100">>
+     <div class="container">
+          <h1>📊 User Login Activity</h1>
+          <canvas id="loginChart" width="800" height="50"></canvas>
 
-@model List<MRSTWeb.Domain.Entities.Product.Service>
+          <h2 class="mt-5">🛒 Products</h2>
+          <table class="table table-bordered">
+               <thead>
+                    <tr>
+                         <th>Image</th>
+                         <th>Name</th>
+                         <th>Description</th>
+                         <th>Price</th>
+                         <th>Actions</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    @foreach (var product in Model)
+                    {
+                         <tr>
+                              <td><img src="@product.ImagePath" width="80" /></td>
+                              <td>@product.Name</td>
+                              <td>@product.Description</td>
+                              <td>@product.Price</td>
+                              <td>
+                                   <a href="@Url.Action("EditProduct", "Home", new { id = product.Id })" class="btn btn-warning btn-sm">Edit</a>
+                                   <a href="@Url.Action("DeleteProduct", "Home", new { id = product.Id })" class="btn btn-danger btn-sm">Delete</a>
+                              </td>
+                         </tr>
+                    }
+               </tbody>
+          </table>
 
-@{
-    ViewBag.Title = "Admin Dashboard";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
-<style>
-    body {
-        padding-top: 200px;
-    }
-</style>
-
-
-<h1>📊 User Login Activity</h1>
-<canvas id="loginChart" width="800" height="50"></canvas>
-
-<h2 class="mt-5">🛒 Products</h2>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in Model)
-        {
-            <tr>
-                <td><img src="@product.ImagePath" width="80" /></td>
-                <td>@product.Name</td>
-                <td>@product.Description</td>
-                <td>@product.Price</td>
-                <td>
-                    <a href="@Url.Action("EditProduct", "Home", new { id = product.Id })" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="@Url.Action("DeleteProduct", "Home", new { id = product.Id })" class="btn btn-danger btn-sm">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-<a href="@Url.Action("AddProduct", "Home")" class="btn btn-success">Add New Product</a>
-<a href="@Url.Action("AdminMessages", "Home")" class="btn btn-info">View Contact Messages</a>
-
+          <a href="@Url.Action("AddProduct", "Home")" class="btn btn-success">Add New Product</a>
+          <a href="@Url.Action("AdminMessages", "Home")" class="btn btn-info">View Contact Messages</a>
+     </div>
+</section>
 
 @section scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script>
         const ctx = document.getElementById('loginChart').getContext('2d');
         const chart = new Chart(ctx, {
             type: 'bar',
@@ -68,5 +59,5 @@
                 }]
             }
         });
-    </script>
+     </script>
 }

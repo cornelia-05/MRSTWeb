@@ -279,6 +279,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-icons.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\cornelia.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\slick.css" />
     <Content Include="Content\tooplate-little-fashion.css" />
@@ -289,7 +290,6 @@
     <Content Include="Content\images\bucatarie.jpg" />
     <Content Include="Content\images\cameramasina.jpg" />
     <Content Include="Content\images\cody-lannom-G95AReIh_Ko-unsplash.jpeg" />
-    <Content Include="Content\images\cornelia.png" />
     <Content Include="Content\images\dormitor.jpg" />
     <Content Include="Content\images\header\businesspeople-meeting-office-working.jpg" />
     <Content Include="Content\images\header\positive-european-woman-has-break-after-work.jpg" />

@@ -19,7 +19,7 @@
                               <a href="@Url.Action("About", "Home")" class="footer-menu-link @(ViewContext.RouteData.Values["Action"].ToString() == "About" ? "active" : "")">About us</a>
                          </li>
                          <li class="footer-menu-item">
-                              <a href="#" class="footer-menu-link">Services</a>
+                              <a href="@Url.Action("Products", "Home")" class="footer-menu-link @(ViewContext.RouteData.Values["Action"].ToString() == "Products" ? "active" : "")">Services</a>
                          </li>
                          <li class="footer-menu-item">
                               <a href="#" class="footer-menu-link">Confidentiality policy</a>

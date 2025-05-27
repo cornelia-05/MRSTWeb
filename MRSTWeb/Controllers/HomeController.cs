@@ -48,26 +48,66 @@ namespace MRSTWeb.Controllers
 
           public ActionResult About()
           {
+               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+               {
+                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
+               }
+               else
+               {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+               }
+
                return View();
           }
+
           public ActionResult Contact()
           {
+               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+               {
+                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
+               }
+               else
+               {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+               }
+
                return View();
           }
+
           public ActionResult Faq()
           {
+               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+               {
+                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
+               }
+               else
+               {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+               }
+
                return View();
           }
+
           public ActionResult Product_detail()
           {
+               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+               {
+                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
+               }
+               else
+               {
+                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
+               }
+
                return View();
           }
+
           public ActionResult Products()
           {
             var products = _product.GetAll();
             return View(products);
           }
-        public ActionResult AdminDashboard()
+          public ActionResult AdminDashboard()
         {
             using (var db = new DBContext())
             {
