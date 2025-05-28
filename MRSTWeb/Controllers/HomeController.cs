@@ -19,6 +19,7 @@ using MRSTWeb.Domain.Entities.User.Global;
 using MRSTWeb.Domain.Enums;
 using MRSTWeb.Domain.Models;
 using MRSTWeb.Models;
+using MRSTWeb.Models.ViewModels;
 
 
 namespace MRSTWeb.Controllers
@@ -38,19 +39,23 @@ namespace MRSTWeb.Controllers
           private readonly IProduct _product;
           private readonly IAdminApi _dashboard;
           private readonly IContactBL _contactBL;
-          public HomeController(IAdminApi dashboard, IProduct product, IContactBL contactBL)
+          private readonly IUserApi _userApi;
+          public HomeController(IUserApi userApi, IAdminApi dashboard, IProduct product, IContactBL contactBL)
           {
                _dashboard = dashboard;
                _product = product;
                _contactBL = contactBL;
+               _userApi = userApi;
           }
           public ActionResult AdminDashboard()
           {
-               var logins = _dashboard.GetLoginStats();
-               var products = _dashboard.GetAllProducts();
+               var model = new DashboardViewModel
+               {
+                    LoginStats = _userApi.GetLoginStats().ToList(),
+                    Services = _dashboard.GetAllProducts().ToList()
+               };
 
-               ViewBag.LoginStats = logins;
-               return View(products);
+               return View(model);
           }
           public ActionResult Index() => View();
           public ActionResult About() => View();

@@ -1,12 +1,12 @@
-﻿@model List<MRSTWeb.Domain.Entities.Product.Service>
+﻿@model MRSTWeb.Models.ViewModels.DashboardViewModel
+
 @using MRSTWeb.Domain.Models
 @{
-     var logins = ViewBag.LoginStats as List<LoginStatViewModel> ?? new List<LoginStatViewModel>();
      ViewBag.Title = "Admin Dashboard";
      Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<section class="d-flex justify-content-center align-items-center min-vh-100">>
+<section class="d-flex justify-content-center align-items-center min-vh-100">
      <div class="container">
           <h1>📊 User Login Activity</h1>
           <canvas id="loginChart" width="800" height="50"></canvas>
@@ -23,7 +23,7 @@
                     </tr>
                </thead>
                <tbody>
-                    @foreach (var product in Model)
+                    @foreach (var product in Model.Services)
                     {
                          <tr>
                               <td><img src="@product.ImagePath" width="80" /></td>
@@ -51,12 +51,17 @@
         const chart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: @Html.Raw("[" + string.Join(",", logins.Select(l => "\"" + l.Email + "\"")) + "]"),
+                labels: @Html.Raw("[" + string.Join(",", Model.LoginStats.Select(l => "\"" + l.Email + "\"")) + "]"),
                 datasets: [{
                     label: 'Login Count',
-                    data: [@string.Join(",", logins.Select(l => l.Count))],
+                    data: [@string.Join(",", Model.LoginStats.Select(l => l.Count))],
                     backgroundColor: 'rgba(54, 162, 235, 0.6)'
                 }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
             }
         });
      </script>
