@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MRSTWeb.Models
+namespace MRSTWeb.Domain.Models
 {
      public class RegisterViewModel
      {

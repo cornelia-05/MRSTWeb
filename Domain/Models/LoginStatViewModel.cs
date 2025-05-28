@@ -1,4 +1,4 @@
-﻿namespace MRSTWeb.Models.ViewModels
+﻿namespace MRSTWeb.Domain.Models
 {
     public class LoginStatViewModel
     {

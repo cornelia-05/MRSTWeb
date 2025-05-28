@@ -1,80 +1,82 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using MRSTWeb.Data.Context;
+using MRSTWeb.BusinessLogic.Interfaces; 
 using MRSTWeb.Models;
 
 namespace MRSTWeb.Controllers
 {
-    public class CartController : Controller
-    {
-        private const string CartSessionKey = "Cart";
+     public class CartController : Controller
+     {
+          private const string CartSessionKey = "Cart";
+          private readonly IProduct _productService;
 
-        private List<CartItem> GetCart()
-        {
-            if (Session[CartSessionKey] == null)
-                Session[CartSessionKey] = new List<CartItem>();
+          public CartController(IProduct productService)
+          {
+               _productService = productService;
+          }
 
-            return (List<CartItem>)Session[CartSessionKey];
-        }
+          private List<CartItem> GetCart()
+          {
+               if (Session[CartSessionKey] == null)
+                    Session[CartSessionKey] = new List<CartItem>();
 
-        public ActionResult Index()
-        {
-            var cart = GetCart();
-            return View(cart);
-        }
+               return (List<CartItem>)Session[CartSessionKey];
+          }
 
-        public ActionResult AddToCart(int id)
-        {
-            var db = new DBContext();
-            var product = db.Services.Find(id);
-            if (product == null)
-                return HttpNotFound();
+          public ActionResult Index()
+          {
+               var cart = GetCart();
+               return View(cart);
+          }
 
-            var cart = GetCart();
-            var existing = cart.FirstOrDefault(c => c.Product.Id == id);
+          public ActionResult AddToCart(int id)
+          {
+               var product = _productService.GetById(id);
+               if (product == null)
+                    return HttpNotFound();
 
-            if (existing != null)
-                existing.Quantity++;
-            else
-                cart.Add(new CartItem { Product = product, Quantity = 1 });
+               var cart = GetCart();
+               var existing = cart.FirstOrDefault(c => c.Product.Id == id);
 
-            return RedirectToAction("Products", "Home", new { added = product.Name });
-        }
+               if (existing != null)
+                    existing.Quantity++;
+               else
+                    cart.Add(new CartItem { Product = product, Quantity = 1 });
 
+               return RedirectToAction("Products", "Home", new { added = product.Name });
+          }
 
-        public ActionResult Remove(int id)
-        {
-            var cart = GetCart();
-            var item = cart.FirstOrDefault(c => c.Product.Id == id);
-            if (item != null) cart.Remove(item);
-            return RedirectToAction("Index");
-        }
+          public ActionResult Remove(int id)
+          {
+               var cart = GetCart();
+               var item = cart.FirstOrDefault(c => c.Product.Id == id);
+               if (item != null) cart.Remove(item);
+               return RedirectToAction("Index");
+          }
 
-        public ActionResult Clear()
-        {
-            Session[CartSessionKey] = new List<CartItem>();
-            return RedirectToAction("Index");
-        }
+          public ActionResult Clear()
+          {
+               Session[CartSessionKey] = new List<CartItem>();
+               return RedirectToAction("Index");
+          }
 
-        public ActionResult Checkout()
-        {
-            var cart = GetCart();
-            return View(cart); // we'll build the view next
-        }
+          public ActionResult Checkout()
+          {
+               var cart = GetCart();
+               return View(cart);
+          }
 
-        [HttpPost]
-        public ActionResult ConfirmOrder()
-        {
-            // Save order logic here
-            Session[CartSessionKey] = null;
-            return RedirectToAction("ThankYou");
-        }
+          [HttpPost]
+          public ActionResult ConfirmOrder()
+          {
+               Session[CartSessionKey] = null;
+               return RedirectToAction("ThankYou");
+          }
 
-        public ActionResult ThankYou()
-        {
-            return View();
-        }
-    }
+          public ActionResult ThankYou()
+          {
+               return View();
+          }
+     }
 }

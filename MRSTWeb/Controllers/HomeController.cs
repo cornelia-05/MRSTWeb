@@ -1,283 +1,141 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
-using MRSTWeb.BusinessLogic.Interfaces;
-using BusinessLogic;
-using MRSTWeb.Data.Context;
-using MRSTWeb.Domain.Entities.User;
-using MRSTWeb.Models;
-using MRSTWeb.Domain.Enums;
 using System.Web.Helpers;
-using MRSTWeb.Domain.Entities.Product;
-using MRSTWeb.Domain.Entities.User.Global;
+using System.Web.Mvc;
 using System.Windows.Forms;
-using System.Data.Entity;
-using MRSTWeb.Models.ViewModels;
-using System.IO;
+using BusinessLogic;
 using MRSTWeb.BusinessLogic;
+using MRSTWeb.BusinessLogic.Core;
+using MRSTWeb.BusinessLogic.Interfaces;
+using MRSTWeb.Data.Context;
 using MRSTWeb.Domain.Entities.Contact;
+using MRSTWeb.Domain.Entities.Product;
+using MRSTWeb.Domain.Entities.User;
+using MRSTWeb.Domain.Entities.User.Global;
+using MRSTWeb.Domain.Enums;
+using MRSTWeb.Domain.Models;
+using MRSTWeb.Models;
 
 
 namespace MRSTWeb.Controllers
 {
-     public class HomeController : Controller
+     public class BaseController : Controller
      {
-        private  IProduct _product;
-        public HomeController()
-        {
-            _product = new ProductBL(); // Or use LogicProvider if needed
-        }
-
-
-        public ActionResult Index()
+          protected override void OnActionExecuting(ActionExecutingContext filterContext)
           {
-               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
-               {
-                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
-               }
-               else
-               {
-                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
-               }
-
-               return View();
+               ViewBag.Layout = (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
+                   ? "~/Views/Shared/_AdminLayout.cshtml"
+                   : "~/Views/Shared/_Layout.cshtml";
+               base.OnActionExecuting(filterContext);
           }
-
-
-          public ActionResult About()
+     }
+     public class HomeController : BaseController
+     {
+          private readonly IProduct _product;
+          private readonly IAdminApi _dashboard;
+          private readonly IContactBL _contactBL;
+          public HomeController(IAdminApi dashboard, IProduct product, IContactBL contactBL)
           {
-               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
-               {
-                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
-               }
-               else
-               {
-                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
-               }
-
-               return View();
-          }
-
-          public ActionResult Contact()
-          {
-               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
-               {
-                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
-               }
-               else
-               {
-                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
-               }
-
-               return View();
-          }
-
-          public ActionResult Faq()
-          {
-               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
-               {
-                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
-               }
-               else
-               {
-                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
-               }
-
-               return View();
-          }
-
-          public ActionResult Product_detail()
-          {
-               if (Session["IsAdmin"] != null && (bool)Session["IsAdmin"])
-               {
-                    ViewBag.Layout = "~/Views/Shared/_AdminLayout.cshtml";
-               }
-               else
-               {
-                    ViewBag.Layout = "~/Views/Shared/_Layout.cshtml";
-               }
-
-               return View();
-          }
-
-          public ActionResult Products()
-          {
-            var products = _product.GetAll();
-            return View(products);
+               _dashboard = dashboard;
+               _product = product;
+               _contactBL = contactBL;
           }
           public ActionResult AdminDashboard()
-        {
-            using (var db = new DBContext())
-            {
-                var logins = db.Users
-                    .Where(u => u.LoginCount > 0)
-                    .GroupBy(u => u.Email ?? u.Credential)
-                    .Select(g => new LoginStatViewModel
-                    {
-                        Email = g.Key,
-                        Count = g.Sum(u => u.LoginCount)
-                    }).ToList();
+          {
+               var logins = _dashboard.GetLoginStats();
+               var products = _dashboard.GetAllProducts();
 
-                var products = db.Services.ToList();
-
-                ViewBag.LoginStats = logins;
-                return View(products);
-            }
-        }
-
-        public ActionResult EditProduct(int id)
-        {
-            using (var db = new DBContext())
-            {
-                var product = db.Services.Find(id);
-                return View(product);
-            }
-        }
-
-        [HttpPost]
-        public ActionResult EditProduct(Service product, HttpPostedFileBase imageFile)
-        {
-            using (var db = new DBContext())
-            {
-                var existing = db.Services.Find(product.Id);
-                if (existing == null)
-                    return HttpNotFound();
-
-                existing.Name = product.Name;
-                existing.Description = product.Description;
-                existing.Price = product.Price;
-
-                if (imageFile != null && imageFile.ContentLength > 0)
-                {
+               ViewBag.LoginStats = logins;
+               return View(products);
+          }
+          public ActionResult Index() => View();
+          public ActionResult About() => View();
+          public ActionResult Faq() => View();
+          public ActionResult AddProduct() => View();
+          [HttpPost]
+          public ActionResult AddProduct(Service product, HttpPostedFileBase imageFile)
+          {
+               if (imageFile != null && imageFile.ContentLength > 0)
+               {
                     string fileName = Path.GetFileName(imageFile.FileName);
-                    string imagePath = Path.Combine(Server.MapPath("~/Content/images/"), fileName);
-                    imageFile.SaveAs(imagePath);
+                    string folderPath = Server.MapPath("~/Content/Images/");
+                    Directory.CreateDirectory(folderPath); // Safe even if exists
 
-                    existing.ImagePath = "/Content/images/" + fileName;
-                }
+                    string path = Path.Combine(folderPath, fileName);
+                    imageFile.SaveAs(path);
 
-                db.SaveChanges();
-            }
+                    product.ImagePath = "/Content/Images/" + fileName;
+               }
 
-            return RedirectToAction("AdminDashboard");
-        }
+               _product.Add(product);
+               return RedirectToAction("AdminDashboard");
+          }
+          public ActionResult Products()
+          {
+               var products = _dashboard.GetAllProducts(); // or wherever you get products
+               if (products == null)
+                    products = new List<Service>(); // avoid nulls
 
-
-        public ActionResult AddProduct()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AddProduct(Service product, HttpPostedFileBase imageFile)
-        {
-            if (imageFile != null && imageFile.ContentLength > 0)
-            {
-                string fileName = Path.GetFileName(imageFile.FileName);
-                string path = Path.Combine(Server.MapPath("~/Content/Images/"), fileName);
-                string folderPath = Server.MapPath("~/Content/images/");
-                if (!Directory.Exists(folderPath))
-                {
+               return View(products);
+          }
+          public ActionResult Contact() => View();
+          public ActionResult Product_detail() => View();
+          public ActionResult EditProduct(int id)
+          {
+               var product = _product.GetById(id);
+               if (product == null) return HttpNotFound();
+               return View(product);
+          }
+          [HttpPost]
+          public ActionResult EditProduct(Service product, HttpPostedFileBase imageFile)
+          {
+               if (imageFile != null && imageFile.ContentLength > 0)
+               {
+                    string fileName = Path.GetFileName(imageFile.FileName);
+                    string folderPath = Server.MapPath("~/Content/Images/");
                     Directory.CreateDirectory(folderPath);
-                }
 
-                imageFile.SaveAs(path);
+                    string path = Path.Combine(folderPath, fileName);
+                    imageFile.SaveAs(path);
 
-                product.ImagePath = "/Content/Images/" + fileName;
-            }
+                    product.ImagePath = "/Content/Images/" + fileName;
+               }
 
-            _product.Add(product); // Use BL method
-            return RedirectToAction("AdminDashboard");
-        }
+               _product.Update(product); 
+               return RedirectToAction("Index");
+          }
+          public ActionResult DeleteProduct(int id)
+          {
+               _product.Delete(id);
+               return RedirectToAction("Index");
+          }
+          public ActionResult AdminMessages()
+          {
+               var messages = _contactBL.GetAllMessages(); // Clean delegation to business logic
+               return View(messages);
+          }
+          [HttpPost]
+          [ValidateAntiForgeryToken]
+          [HttpGet]
+          public ActionResult Contacts()
+          {
+               return View();
+          }
 
-        public ActionResult DeleteProduct(int id)
-        {
-            using (var db = new DBContext())
-            {
-                var product = db.Services.Find(id);
-                if (product != null)
-                {
-                    db.Services.Remove(product);
-                    db.SaveChanges();
-                }
-                return RedirectToAction("AdminDashboard");
-            }
-        }
-        public ActionResult AdminMessages()
-        {
-            if (TempData["ContactMessages"] != null)
-            {
-                ViewBag.ContactMessages = TempData["ContactMessages"];
-            }
-            else
-            {
-                // fallback if nothing in TempData
-                ViewBag.ContactMessages = HomeController.ContactMessages ?? new List<ContactMessageViewModel>();
-            }
+          [HttpPost]
+          public ActionResult SubmitContact(ContactMessageViewModel model)
+          {
+               if (!ModelState.IsValid)
+                    return View("Contact", model);
 
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Contact(ContactMessageViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                using (var db = new DBContext())
-                {
-                    var message = new ContactMessage
-                    {
-                        Name = model.Name,
-                        Email = model.Email,
-                        Subject = model.Subject,
-                        Message = model.Message
-                    };
-
-                    db.ContactMessages.Add(message);
-                    db.SaveChanges();
-
-                    // Add to static in-memory list for UI
-                    ContactMessages.Add(new ContactMessageViewModel
-                    {
-                        Name = model.Name,
-                        Email = model.Email,
-                        Subject = model.Subject,
-                        Message = model.Message,
-                        SubmittedAt = DateTime.Now
-                    });
-
-                }
-
-                ViewBag.Message = "Thank you! We’ll get back to you soon.";
-                return RedirectToAction("Contact");
-            }
-
-            return View(model);
-        }
-        
-      
-        public static List<ContactMessageViewModel> ContactMessages = new List<ContactMessageViewModel>();
-
-        [HttpPost]
-        public ActionResult SubmitContact(string Name, string Email, string Subject, string Message)
-        {
-            ContactMessages.Add(new ContactMessageViewModel
-            {
-                Name = Name,
-                Email = Email,
-                Subject = Subject,
-                Message = Message,
-                SubmittedAt = DateTime.Now
-            });
-
-            TempData["SuccessMessage"] = "Thank you for your message!";
-            return RedirectToAction("Contact");
-        }
-
-
-
-    }
+               model.SubmittedAt = DateTime.Now;
+               _contactBL.SaveMessage(model);
+               TempData["SuccessMessage"] = "Thank you for your message!";
+               return RedirectToAction("Contact");
+          }
+     }
 }

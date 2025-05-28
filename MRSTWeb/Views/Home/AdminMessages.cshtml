@@ -1,4 +1,4 @@
-﻿@model List<MRSTWeb.Models.ViewModels.ContactMessageViewModel>
+﻿@model List<MRSTWeb.Domain.Models.ContactMessageViewModel>
 
 @{
     ViewBag.Title = "Contact Messages";
@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var msg in ViewBag.ContactMessages)
+        @foreach (var msg in Model)
         {
             <tr>
                 <td>@msg.SubmittedAt.ToString("g")</td>

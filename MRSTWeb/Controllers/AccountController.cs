@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using MRSTWeb.BusinessLogic.Interfaces;
 using MRSTWeb.BusinessLogic;
+using MRSTWeb.BusinessLogic.Core;
+using MRSTWeb.BusinessLogic.Interfaces;
 using MRSTWeb.Data.Context;
 using MRSTWeb.Domain.Entities.User;
-using MRSTWeb.Models;
 using MRSTWeb.Domain.Enums;
+using MRSTWeb.Domain.Models;
+using MRSTWeb.BusinessLogic.Models;
 
 namespace MRSTWeb.Controllers
 {
      public class AccountController : Controller
      {
           private readonly ISession _session;
-          private readonly DBContext _context;
+          private readonly IUserApi _userApi;
 
-          public AccountController()
+          public AccountController(IUserApi userApi, ISession session)
           {
-               _session = SessionFactory.GetsessionBL();
-               _context = new DBContext();
+               _session = session;
+               _userApi = userApi;
           }
 
           // SignIn Action (GET)
@@ -33,42 +35,24 @@ namespace MRSTWeb.Controllers
           {
                if (ModelState.IsValid)
                {
-                    var user = _context.Users.FirstOrDefault(u => u.Credential == model.Email);
-                    if (user != null && BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
-                    { 
-                    user.LastLogin = DateTime.Now;
-                    user.LoginCount += 1;
-                    if (string.IsNullOrEmpty(user.Email))
-                    {
-                        user.Email = user.Credential;
-                    }
+                    var result = _userApi.SignIn(model);
 
-                         _context.SaveChanges();
+                    if (result.Success)
+                    {
+                         var user = result.User;
+
                          Session["UserKey"] = Guid.NewGuid().ToString();
                          Session["Email"] = user.Credential;
-                   
-
-                    if (user.Role == LevelAcces.Admin)
-                         {
-                              Session["IsAdmin"] = true;
-                         }
-                         else
-                         {
-                              Session["IsAdmin"] = false;
-                         }
+                         Session["IsAdmin"] = user.Role == LevelAcces.Admin;
 
                          return RedirectToAction("Index", "Home");
-
                     }
 
-                    ModelState.AddModelError("", "Invalid email or password.");
+                    ModelState.AddModelError("", result.ErrorMessage);
                }
 
                return View(model);
           }
-
-
-
 
           // SignUp Action (GET)
           public ActionResult SignUp()
@@ -77,36 +61,21 @@ namespace MRSTWeb.Controllers
           }
 
           // SignUp Action (POST)
-
           [HttpPost]
           [ValidateAntiForgeryToken]
           public ActionResult SignUp(RegisterViewModel model)
           {
-
                if (ModelState.IsValid)
                {
-                    if (_context.Users.Any(u => u.Credential == model.Email))
+                    if (!_userApi.SignUp(model))
                     {
-            
-
-                    ModelState.AddModelError("Email", "Email is already registered.");
+                         ModelState.AddModelError("Email", "Email is already registered.");
                          return View(model);
                     }
 
-                    var user = new ULoginData
-                    {
-                         Credential = model.Email,
-                         Password = BCrypt.Net.BCrypt.HashPassword(model.Password),
-                         Role = LevelAcces.User,
-                        LastLogin = DateTime.Now
-                    };
-
-                    _context.Users.Add(user);
-                    _context.SaveChanges();
-
                     return RedirectToAction("SignIn");
-
                }
+
                return View(model);
           }
 
@@ -115,22 +84,18 @@ namespace MRSTWeb.Controllers
           [ValidateAntiForgeryToken]
           public ActionResult Logout()
           {
-               // Clear the session
                Session.Clear();
                Session.Abandon();
                return RedirectToAction("Index", "Home");
           }
 
-     }
-    public class AdminController : Controller
-    {
-        // GET: Admin
-        public ActionResult Dashboard()
-        {
-            return View();
-        }
+          }
+           public class AdminController : Controller
+          {
+             public ActionResult Dashboard()
+             {
+                 return View();
+             }
  
-}
-
-    
+          }
 }

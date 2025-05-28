@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using MRSTWeb.BusinessLogic.Interfaces;
 using MRSTWeb.BusinessLogic;
+using MRSTWeb.Data.Context;
 
-namespace MRSTWeb.Models
+namespace MRSTWeb.BusinessLogic.Models
 {
      public static class SessionFactory
      {
-          public static ISession GetsessionBL()
+          public static ISession CreateSession()
           {
-               return new SessionBL();
+               var context = new DBContext(); 
+               return new SessionBL(context);
           }
      }
 

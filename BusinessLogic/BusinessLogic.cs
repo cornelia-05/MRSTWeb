@@ -6,12 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using MRSTWeb.Data.Context;
 
 namespace BusinessLogic
 {
      public class LogicProvider
      {
-          public ISession GetsessionBL() => new SessionBL();
+
+          public ISession GetsessionBL(DBContext context)
+          {
+               return new SessionBL(context);
+          }
           public IProduct GetProductBL() => new ProductBL();
      }
 }

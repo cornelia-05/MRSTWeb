@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 
 
-namespace MRSTWeb.Models.ViewModels
+namespace MRSTWeb.Domain.Models
 {
     public class ContactMessageViewModel
     {

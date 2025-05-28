@@ -7,18 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MRSTWeb.Data.Context;
 
 namespace MRSTWeb.BusinessLogic
 {
     public class SessionBL : UserApi, ISession
      {
-        public ActionStatus UserLogin(ULoginData data)
-        {
-            return UserLogData(data);
-        }
-        public LevelStatus CheckLevel(string key)
-        {
-            return CheckLevelLogic(key);
-        }
-    }
+          public SessionBL(DBContext context) : base(context) { }
+          public ActionStatus UserLogin(ULoginData data) => UserLogData(data);
+          public LevelStatus CheckLevel(string key) => CheckLevelLogic(key);
+     }
 }

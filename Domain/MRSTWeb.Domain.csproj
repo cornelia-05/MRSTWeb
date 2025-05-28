@@ -252,6 +252,10 @@
     <Compile Include="Entities\User\UDbTable.cs" />
     <Compile Include="Entities\User\ULoginData.cs" />
     <Compile Include="Enums\LevelAcces.cs" />
+    <Compile Include="Models\ContactMessageViewModel.cs" />
+    <Compile Include="Models\LoginStatViewModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
