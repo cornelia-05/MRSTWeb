@@ -40,12 +40,13 @@ namespace MRSTWeb.Controllers
           private readonly IAdminApi _dashboard;
           private readonly IContactBL _contactBL;
           private readonly IUserApi _userApi;
-          public HomeController(IUserApi userApi, IAdminApi dashboard, IProduct product, IContactBL contactBL)
+          public HomeController()
           {
-               _dashboard = dashboard;
-               _product = product;
-               _contactBL = contactBL;
-               _userApi = userApi;
+               var _bl = new MRSTWeb.BusinessLogic.Interfaces.BusinessLogic();
+            _dashboard = _bl.GetAdminApi();
+               _product = _bl.GetProductApi();
+               _contactBL = _bl.GetContactApi();
+               _userApi = _bl.GetUserApi();
           }
           public ActionResult AdminDashboard()
           {

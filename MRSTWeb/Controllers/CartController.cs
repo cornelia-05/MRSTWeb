@@ -11,9 +11,10 @@ namespace MRSTWeb.Controllers
           private const string CartSessionKey = "Cart";
           private readonly IProduct _productService;
 
-          public CartController(IProduct productService)
+          public CartController()
           {
-               _productService = productService;
+            var _bl = new MRSTWeb.BusinessLogic.Interfaces.BusinessLogic();
+            _productService = _bl.GetProductApi();
           }
 
           private List<CartItem> GetCart()

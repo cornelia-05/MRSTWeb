@@ -14,10 +14,11 @@ namespace MRSTWeb.Controllers
           private readonly IProduct _product;
           private readonly ISession _session;
 
-          public ProductDetailController(IProduct product, ISession session)
+          public ProductDetailController()
           {
-               _product = product;
-               _session = session;
+            var _bl = new MRSTWeb.BusinessLogic.Interfaces.BusinessLogic();
+            _product = _bl.GetProductApi();
+               _session = _bl.GetSessionApi();
           }
 
           public ActionResult Index()

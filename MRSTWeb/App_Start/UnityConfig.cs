@@ -31,7 +31,7 @@ namespace MRSTWeb
                container.RegisterType<ISession, SessionLogic>();
                container.RegisterType<IProduct, ProductBL>();
                container.RegisterType<DBContext>(new PerRequestLifetimeManager());
-               container.RegisterType<IAdminApi, DashboardService>();
+               container.RegisterType<IAdminApi, AdminApi>();
                container.RegisterType<IUserApi, UserApi>();
                container.RegisterType<IContactBL, ContactBL>();
 

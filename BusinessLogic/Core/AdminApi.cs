@@ -10,14 +10,11 @@ using MRSTWeb.BusinessLogic.Interfaces;
 
 namespace MRSTWeb.BusinessLogic.Core
 {
-    public class AdminApi
+    public class AdminApi : IAdminApi
     {
-    }
-     public class DashboardService : IAdminApi
-     {
           private readonly DBContext _db;
 
-          public DashboardService(DBContext db)
+          public AdminApi(DBContext db)
           {
                _db = db;
           }

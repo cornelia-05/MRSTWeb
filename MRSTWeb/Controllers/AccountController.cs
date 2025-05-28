@@ -15,19 +15,20 @@ namespace MRSTWeb.Controllers
      public class AccountController : Controller
      {
           private readonly ISession _session;
-          private readonly IUserApi _userApi;
+        private readonly IUserApi _userApi;
 
-          public AccountController(IUserApi userApi, ISession session)
+          public AccountController()
           {
-               _session = session;
-               _userApi = userApi;
+            var _bl = new MRSTWeb.BusinessLogic.Interfaces.BusinessLogic();
+               _session = _bl.GetSessionApi();
+               _userApi = _bl.GetUserApi(); 
           }
 
           // SignIn Action (GET)
           public ActionResult SignIn()
           {
-               return View();
-          }
+                return View();
+        }
 
           [HttpPost]
           [ValidateAntiForgeryToken]

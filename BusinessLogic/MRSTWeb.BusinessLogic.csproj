@@ -254,7 +254,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="BusinessLogic.cs" />
+    <Compile Include="Interfaces\BusinessLogic.cs" />
     <Compile Include="ContactBL.cs" />
     <Compile Include="Core\AdminApi.cs" />
     <Compile Include="Core\UserApi.cs" />
