@@ -49,6 +49,10 @@ namespace MRSTWeb.Controllers
           }
           public ActionResult AdminDashboard()
           {
+               if (Session["IsAdmin"] == null || !(bool)Session["IsAdmin"])
+               {
+                    return RedirectToAction("AccessDenied", "Home");
+               }
                var model = new DashboardViewModel
                {
                     LoginStats = _userApi.GetLoginStats().ToList(),
